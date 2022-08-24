@@ -3,3 +3,4 @@ https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-
  - We strive to follow the C# Coding Conventions
 
 Code as you code, refactor afterwards.
+
