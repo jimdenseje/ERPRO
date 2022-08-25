@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ERPRO.Corporation
+namespace ERPRO.CorporationNS
 {
     public class Corporation
     {

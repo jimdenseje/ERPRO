@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ERPRO.Corporation;
+using ERPRO.CorporationNS;
 
 namespace ERPRO.Database
 {
@@ -10,10 +10,10 @@ namespace ERPRO.Database
     {
         public static Database Instance { get; } = new Database();
 
-        public static List<Corporation.Corporation> CorporationList { get; } = new List<Corporation.Corporation>();
+        public static List<Corporation> CorporationList { get; } = new List<Corporation>();
 
-        public Corporation.Corporation GetCorporation(int id) {
-            Corporation.Corporation result = null;
+        public Corporation GetCorporation(int id) {
+            Corporation result = null;
             foreach (var corporation in CorporationList)
             {
                 if (id == corporation.ID) {
@@ -24,20 +24,20 @@ namespace ERPRO.Database
             return result;
         }
 
-        public List<Corporation.Corporation> GetCorporation() {
-            List<Corporation.Corporation> corporations = new List<Corporation.Corporation>();
+        public List<Corporation> GetCorporation() {
+            List<Corporation> corporations = new List<Corporation>();
             foreach (var crp in CorporationList) {
                 corporations.Add(crp);
             }
             return corporations;
         }
 
-        public Corporation.Corporation InsertCorporation(Corporation.Corporation corporation) {
+        public Corporation InsertCorporation(Corporation corporation) {
             CorporationList.Add(corporation);
             return corporation;
         }
 
-        public void UpdateCorporation(Corporation.Corporation corporation, int id) {
+        public void UpdateCorporation(Corporation corporation, int id) {
             for (int i = 0; i < CorporationList.Count; i++) {
                 if (CorporationList[i].ID == id) {
                     CorporationList[i] = corporation;
@@ -46,7 +46,7 @@ namespace ERPRO.Database
             }
         }
 
-        public void DeleteCorporation(Corporation.Corporation corporation, int id) {
+        public void DeleteCorporation(Corporation corporation, int id) {
             for (int i = 0; i < CorporationList.Count; i++) {
                 if (CorporationList[i].ID == id) {
                     CorporationList.RemoveAt(i);
