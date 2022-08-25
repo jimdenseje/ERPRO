@@ -9,9 +9,9 @@ namespace ERPRO.Corporation
     {
         public string CorporationName { get; set; }
         public string RoadName { get; set; }
-        public string HouseNumber { get; set; }
+        public string BuildingNumber { get; set; }
         public string Zipcode { get; set; }
-        public string TownName { get; set; }
+        public string CityName { get; set; }
         public string Country { get; set; }
         public string CurrencyCode { get; set; }   
     }
