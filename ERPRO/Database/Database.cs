@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.CorporationNS;
 
-namespace ERPRO.Database
+namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {

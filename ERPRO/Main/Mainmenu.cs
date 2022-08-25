@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
-
-namespace ERPRO.Main
+using ERPRO.CorporationNS;
+namespace ERPRO.MainNS
 {
     public class Mainmenu : Screen
     {
@@ -12,6 +12,9 @@ namespace ERPRO.Main
 
         protected override void Draw () {
             Console.WriteLine("Welcome to ERPRO, your favourite ERP system.");
+            Menu mainMenu = new Menu();
+            mainMenu.Add(new CorporationMenu());
+            mainMenu.Start(this);
         }
     }
 }
