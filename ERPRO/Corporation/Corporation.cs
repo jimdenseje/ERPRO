@@ -7,6 +7,7 @@ namespace ERPRO.Corporation
 {
     public class Corporation
     {
+        public int ID { get; private set; }
         public string CorporationName { get; set; }
         public string RoadName { get; set; }
         public string BuildingNumber { get; set; }
