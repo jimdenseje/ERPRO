@@ -11,8 +11,6 @@ namespace ERPRO.MainNS
         public override string Title { get; set; } = "Main menu";
 
         protected override void Draw () {
-            Console.WriteLine("Welcome to ERPRO, your favourite ERP system.");
-
             Menu mainMenu = new Menu();
             mainMenu.Add(new CorporationMenu());
             mainMenu.Start(this);
