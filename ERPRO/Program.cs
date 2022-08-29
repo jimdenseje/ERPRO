@@ -47,6 +47,16 @@ Database.Instance.InsertCustomer(new Customer
     Email = "jimdenseje@gmail.com"
 });
 
+Database.Instance.InsertCustomer(new Customer
+{
+    CustomerID = 2,
+    ID = 2,
+    FirstName = "Jim",
+    LastName = "Damgaard",
+    PhoneNumber = "+4550533174",
+    Email = "jimdenseje@gmail.com"
+});
+
 string intro = @" .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
 | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
 | |  _________   | || |  _______     | || |   ______     | || |  _______     | || |     ____     | |
