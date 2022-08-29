@@ -19,15 +19,19 @@ namespace ERPRO.CorporationNS
             Clear(this);
             Form<Corporation> edit = new Form<Corporation>();
             edit.TextBox("Corporation name", "CorporationName");
-            edit.TextBox("Road name", "RoadName");
+            edit.TextBox("Country", "Country");
+            edit.TextBox("City", "CityName");
+            edit.TextBox("Zip code", "Zipcode");
+            edit.TextBox("Road", "RoadName");
+            edit.TextBox("Building", "BuildingNumber");
             edit.SelectBox("Currency code", "CurrencyCode");
             edit.AddOption("Currency code", "None", CurrencyCode.None);
             edit.AddOption("Currency code", "DKK", CurrencyCode.DKK);
             edit.AddOption("Currency code", "USD", CurrencyCode.USD);
             edit.AddOption("Currency code", "EUR", CurrencyCode.EUR);
-            
             edit.Edit(corporation);
             Quit();
+            Clear(this);
         }
     }
 }
