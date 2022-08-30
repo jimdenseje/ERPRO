@@ -40,6 +40,7 @@ namespace ERPRO.CorporationNS
             Display(editor);
             if(newCorporation.CityName != null) {
                 Database.Instance.InsertCorporation(newCorporation);
+                listPage.Add(newCorporation);
             }
         }
 
