@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ERPRO.ProducktsNS;
+using ERPRO.ProductsNS;
 namespace ERPRO.SalesNS
 {
     public enum Status {
@@ -28,18 +28,18 @@ namespace ERPRO.SalesNS
             }
             return totalprice;
         }
-        public void AddSalesOrderLine(Produckt product, decimal qty) {
+        public void AddSalesOrderLine(Product product, decimal qty) {
             OrderLines.Add(new SalesOrderLine(product, qty));
         }
     }
     
     public class SalesOrderLine 
     {
-        public SalesOrderLine(Produckt product, decimal qty) {
+        public SalesOrderLine(Product product, decimal qty) {
             this.Product = product;
             this.SaleQty = qty;
         }
-        public Produckt Product { get; private set; }
+        public Product Product { get; private set; }
         public decimal SaleQty { get; set; }
     }
 }

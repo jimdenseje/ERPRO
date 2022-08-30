@@ -3,7 +3,7 @@ using ERPRO.CorporationNS;
 using ERPRO.DatabaseNS;
 using ERPRO.MainNS;
 using ERPRO.CustomerNS;
-using ERPRO.ProducktsNS;
+using ERPRO.ProductsNS;
 using ERPRO.AddressNS;
 
 Database.Instance.InsertCorporation(new Corporation {
