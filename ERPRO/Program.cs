@@ -3,6 +3,8 @@ using ERPRO.CorporationNS;
 using ERPRO.DatabaseNS;
 using ERPRO.MainNS;
 using ERPRO.CustomerNS;
+using ERPRO.ProducktsNS;
+using ERPRO.AddressNS;
 
 Database.Instance.InsertCorporation(new Corporation {
     ID = 1,
@@ -46,6 +48,17 @@ Database.Instance.InsertCustomer(new Customer
     PhoneNumber = "+4550533174",
     Email = "jimdenseje@gmail.com"
 });
+
+/* Debug data For Address
+Address testaddress = new Address();
+testaddress.BuildingNumber = "A45";
+
+Produckt testproduckt = new Produckt(); 
+testproduckt.ItemID = 1;
+testproduckt.Name = "testproduckt";
+testproduckt.Location = testaddress;*/
+
+
 
 string intro = @" .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
 | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
