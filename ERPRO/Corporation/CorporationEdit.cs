@@ -18,7 +18,7 @@ namespace ERPRO.CorporationNS
         {
             Clear(this);
             Form<Corporation> edit = new Form<Corporation>();
-            edit.TextBox("Corporation name", "CorporationName");
+            edit.TextBox("Corporation name", nameof(corporation.CorporationName));
             edit.TextBox("Country", "Country");
             edit.TextBox("City", "CityName");
             edit.TextBox("Zip code", "Zipcode");

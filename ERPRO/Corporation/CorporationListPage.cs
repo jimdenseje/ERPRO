@@ -11,7 +11,6 @@ namespace ERPRO.CorporationNS
     {
         ListPage<Corporation> listPage;
         public override string Title { get; set; } = "Corporations";
-        public bool refresh;
         protected override void Draw()
         {   
             do {
@@ -20,8 +19,9 @@ namespace ERPRO.CorporationNS
                 listPage.AddKey(ConsoleKey.F1, addCorporation);
                 listPage.AddKey(ConsoleKey.F2, editCorporation);
                 listPage.AddKey(ConsoleKey.F5, deleteCorporation);
-                listPage.AddColumn("Companyname", "CorporationName", 30);
-                listPage.AddColumn("Address", "RoadName", 15);
+                listPage.AddColumn("Companyname", nameof(Corporation.CorporationName), 30);
+                listPage.AddColumn("Country", nameof(Corporation.Country), 15);
+                listPage.AddColumn("Currency", nameof(Corporation.CurrencyCode), 15);
                 var corporations = Database.Instance.GetCorporation();
                 listPage.Add(corporations);
                 var corporation = listPage.Select();
