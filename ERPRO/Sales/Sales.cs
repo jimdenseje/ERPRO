@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ERPRO.ProductsNS;
+using ERPRO.ProductNS;
 namespace ERPRO.SalesNS
 {
     public enum Status {
