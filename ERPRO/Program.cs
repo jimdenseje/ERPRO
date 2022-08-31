@@ -44,7 +44,6 @@ Database.Instance.InsertCorporation(new Corporation {
 
 Database.Instance.InsertCustomer(new Customer
 {
-    CustomerID = 1,
     ID = 1,
     FirstName = "Jim",
     LastName = "Damgaard",

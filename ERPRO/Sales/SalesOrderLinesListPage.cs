@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
-using ERPRO.ProductsNS;
+using ERPRO.ProductNS;
 
 namespace ERPRO.SalesNS
 {
