@@ -42,6 +42,7 @@ Database.Instance.InsertCorporation(new Corporation {
 });
 //Corporation Database instance ending::
 
+//Customer Database instance::
 Database.Instance.InsertCustomer(new Customer
 {
     ID = 1,
@@ -49,11 +50,35 @@ Database.Instance.InsertCustomer(new Customer
     LastName = "Damgaard",
     Address  = "Øster Uttrupvej 3",
     PhoneNumber = "+4550533174",
-    Email = "jimdenseje@gmail.com"
+    Email = "jimdenseje@gmail.com",
+    CustomerNumber = 1264532,
+    LastPurchase = DateTime.Now
 });
+//Customer Database instance ending::
 
+//Product Database instance::
 Database.Instance.InsertProduct(new Product {
     ItemID = 1,
+    Name = "Bold",
+    Description = "En rund orange og sort bold",
+    SellingPrice = 59.99m,
+    PurchasePrice = 39.99m,
+    Quantity = 100,
+    Unit = "Indefinite"
+});
+Database.Instance.InsertProduct(new Product {
+    ItemID = 2,
+    Name = "Basketbold",
+    Description = "En rund orange og sort bold",
+    SellingPrice = 59.99m,
+    PurchasePrice = 39.99m,
+    Quantity = 100,
+    Unit = "Indefinite"
+});
+
+Database.Instance.InsertProduct(new Product
+{
+    ItemID = 3,
     Name = "Bacon",
     Description = "fdsf",
     SellingPrice = 100,
@@ -64,7 +89,7 @@ Database.Instance.InsertProduct(new Product {
 
 Database.Instance.InsertProduct(new Product
 {
-    ItemID = 2,
+    ItemID = 4,
     Name = "Kage",
     Description = "fdsf",
     SellingPrice = 20,
@@ -75,7 +100,7 @@ Database.Instance.InsertProduct(new Product
 
 Database.Instance.InsertProduct(new Product
 {
-    ItemID = 3,
+    ItemID = 5,
     Name = "Æble",
     Description = "fdsf",
     SellingPrice = 10,
@@ -83,6 +108,41 @@ Database.Instance.InsertProduct(new Product
     Quantity = 2,
     Unit = "fdgh",
 });
+
+//Corporation database instances::
+Database.Instance.InsertCorporation(new Corporation {
+    ID = 1,
+    CorporationName = "Fisketorvet",
+    Country = "Denmark",
+    CityName = "Copenhagen",
+    Zipcode = "3600",
+    RoadName = "Kongensvej",
+    BuildingNumber = "A1",
+    CurrencyCode = CurrencyCode.DKK
+});
+
+Database.Instance.InsertCorporation(new Corporation {
+    ID = 2,
+    CorporationName = "Jensens Fiskebiks",
+    Country = "Denmark",
+    CityName = "Copenhagen",
+    Zipcode = "3600",
+    RoadName = "Kongensvej",
+    BuildingNumber = "A1",
+    CurrencyCode = CurrencyCode.DKK
+});
+
+Database.Instance.InsertCorporation(new Corporation {
+    ID = 3,
+    CorporationName = "Skabsrokken",
+    Country = "Denmark",
+    CityName = "Copenhagen",
+    Zipcode = "3600",
+    RoadName = "Kongensvej",
+    BuildingNumber = "A1",
+    CurrencyCode = CurrencyCode.DKK
+});
+//Corporation Database instance ending::
 
 SalesOrder mySaleOrder = new SalesOrder
 {
@@ -107,7 +167,6 @@ mySaleOrder.AddSalesOrderLine(Database.Instance.GetProductFromID(2), 1);
 mySaleOrder.AddSalesOrderLine(Database.Instance.GetProductFromID(3), 10);
 Database.Instance.InsertSaleOrder(mySaleOrder);
 
-
 /* Debug data For Address
 Address testaddress = new Address();
 testaddress.BuildingNumber = "A45";
@@ -116,8 +175,6 @@ Produckt testproduckt = new Produckt();
 testproduckt.ItemID = 1;
 testproduckt.Name = "testproduckt";
 testproduckt.Location = testaddress;*/
-
-
 
 string intro = @" .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
 | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
