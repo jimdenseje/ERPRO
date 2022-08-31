@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPRO.PersonNS
+namespace ERPRO.CustomerNS
 {
     public class Person
     {
@@ -15,6 +15,7 @@ namespace ERPRO.PersonNS
         public string FullName { get => GetFullName(); }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public string Address { get; set; }
 
         private string GetFullName()
         {

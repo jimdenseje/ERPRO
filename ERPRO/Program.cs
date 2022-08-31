@@ -3,10 +3,11 @@ using ERPRO.CorporationNS;
 using ERPRO.DatabaseNS;
 using ERPRO.MainNS;
 using ERPRO.CustomerNS;
-using ERPRO.ProductsNS;
+using ERPRO.ProductNS;
 using ERPRO.AddressNS;
 using ERPRO.SalesNS;
 
+//Corporation database instances::
 Database.Instance.InsertCorporation(new Corporation {
     ID = 1,
     CorporationName = "Fisketorvet",
@@ -39,22 +40,15 @@ Database.Instance.InsertCorporation(new Corporation {
     BuildingNumber = "A1",
     CurrencyCode = CurrencyCode.DKK
 });
+//Corporation Database instance ending::
 
-Database.Instance.InsertCustomer(new Customer {
+Database.Instance.InsertCustomer(new Customer
+{
     CustomerID = 1,
     ID = 1,
     FirstName = "Jim",
     LastName = "Damgaard",
-    PhoneNumber = "+4550533174",
-    Email = "jimdenseje@gmail.com"
-});
-
-Database.Instance.InsertCustomer(new Customer
-{
-    CustomerID = 2,
-    ID = 2,
-    FirstName = "test",
-    LastName = "mig",
+    Address  = "Øster Uttrupvej 3",
     PhoneNumber = "+4550533174",
     Email = "jimdenseje@gmail.com"
 });

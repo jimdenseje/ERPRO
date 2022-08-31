@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ERPRO.AddressNS;
 
-namespace ERPRO.ProductsNS
+namespace ERPRO.ProductNS
 {
     public class Product
     {
@@ -17,15 +17,17 @@ namespace ERPRO.ProductsNS
         public Address Location { get; set; }
         public decimal Quantity { get; set; }
         public string Unit { get; set; }    
+        public decimal ProfitInPercentage { get => GetProfitInPercentage();}
+        public decimal Profit { get => GetProfit();}
        
-        public decimal Profit()
+        private decimal GetProfit()
         {
            return SellingPrice - PurchasePrice;
         }
 
-        public decimal ProfitInPercentage()
+        private decimal GetProfitInPercentage()
         { 
-            return (PurchasePrice / 100) * Profit();
+            return (PurchasePrice / 100) * GetProfit();
         }
     }
 

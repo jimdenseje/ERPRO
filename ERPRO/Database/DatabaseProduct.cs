@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.CorporationNS;
-using ERPRO.ProductsNS;
+using ERPRO.ProductNS;
 
 namespace ERPRO.DatabaseNS
 {
@@ -13,11 +13,11 @@ namespace ERPRO.DatabaseNS
 
         public Product GetProductFromID(int id) {
             Product result = null;
-            foreach (var products in ProductList)
+            foreach (var product in ProductList)
             {
-                if (id == products.ItemID)
+                if (id == product.ItemID)
                 {
-                    result = products;
+                    result = product;
                     break;
                 }
             }
@@ -26,27 +26,27 @@ namespace ERPRO.DatabaseNS
 
         public List<Product> GetAllProducts() {
             List<Product> products = new List<Product>();
-            foreach (var pro in ProductList) {
-                products.Add(pro);
+            foreach (var product in ProductList) {
+                products.Add(product);
             }
-            return ProductList;
-        }
-
-        public Product InsertProduct(Product products) {
-            ProductList.Add(products);
             return products;
         }
 
-        public void UpdateProduct(Product products, int id) {
+        public Product InsertProduct(Product product) {
+            ProductList.Add(product);
+            return product;
+        }
+
+        public void UpdateProduct(Product product, int id) {
             for (int i = 0; i < ProductList.Count; i++) {
                 if (ProductList[i].ItemID == id) {
-                    ProductList[i] = products;
+                    ProductList[i] = product;
                     break;
                 }
             }
         }
 
-        public void DeleteProduct(Product products, int id) {
+        public void DeleteProduct(Product product, int id) {
             for (int i = 0; i < ProductList.Count; i++) {
                 if (ProductList[i].ItemID == id) {
                     ProductList.RemoveAt(i);
