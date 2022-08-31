@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TECHCOOL.UI;
 using ERPRO.CorporationNS;
 using ERPRO.CustomerNS;
+using ERPRO.SalesNS;
 namespace ERPRO.MainNS
 {
     public class Mainmenu : Screen
@@ -15,6 +16,7 @@ namespace ERPRO.MainNS
             Menu mainMenu = new Menu();
             mainMenu.Add(new CorporationMenu());
             mainMenu.Add(new CustomerMenu());
+            mainMenu.Add(new SalesMenu());
             mainMenu.Start(this);
         }
     }

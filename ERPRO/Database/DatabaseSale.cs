@@ -24,7 +24,7 @@ namespace ERPRO.DatabaseNS
 
         public List<SalesOrder> GetSalesOrder() {
             List<SalesOrder> salesorders = new List<SalesOrder>();
-            foreach (var saleorder in salesorders) {
+            foreach (var saleorder in SalesOrderList) { //IMPORTANT her var en fejl hvor SalesOrderList var sat til salesorders saa den lopped sig selv FJERN MIG
                 salesorders.Add(saleorder);
             }
             return salesorders;
