@@ -1,3 +1,4 @@
+using ERPRO.CustomerNS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,12 @@ namespace ERPRO.CustomerNS
 {
     public class CustomerMenu : Screen
     {
-        public override string Title { get; set; } = "Customer Module";
+        public override string Title { get; set; } = "Customermodule";
 
         protected override void Draw () {
-            Menu companyMenu = new Menu();
-            companyMenu.Add(new CustomerListPage());
-            companyMenu.Start(this);
+            Menu customerMenu = new Menu();
+            customerMenu.Add(new CustomerListPage());
+            customerMenu.Start(this);
         }
     }
 }

@@ -41,12 +41,14 @@ Database.Instance.InsertCorporation(new Corporation {
 
 Database.Instance.InsertCustomer(new Customer
 {
-    CustomerID = 1,
     ID = 1,
     FirstName = "Jim",
     LastName = "Damgaard",
+    Address  = "Øster Uttrupvej 3",
     PhoneNumber = "+4550533174",
-    Email = "jimdenseje@gmail.com"
+    Email = "jimdenseje@gmail.com",
+    CustomerNumber = 1264532,
+    LastPurchase = DateTime.Now,z
 });
 
 /* Debug data For Address

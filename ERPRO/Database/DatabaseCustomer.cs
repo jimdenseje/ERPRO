@@ -14,7 +14,7 @@ namespace ERPRO.DatabaseNS
             Customer result = null;
             foreach (var Customer in CustomerList)
             {
-                if (id == Customer.CustomerID) {
+                if (id == Customer.ID) {
                     result = Customer;
                     break;
                 }
@@ -37,7 +37,7 @@ namespace ERPRO.DatabaseNS
 
         public void UpdateCustomer(Customer Customer, int id) {
             for (int i = 0; i < CustomerList.Count; i++) {
-                if (CustomerList[i].CustomerID == id) {
+                if (CustomerList[i].ID == id) {
                     CustomerList[i] = Customer;
                     break;
                 }
@@ -46,7 +46,7 @@ namespace ERPRO.DatabaseNS
 
         public void DeleteCustomer(Customer Customer, int id) {
             for (int i = 0; i < CustomerList.Count; i++) {
-                if (CustomerList[i].CustomerID == id) {
+                if (CustomerList[i].ID == id) {
                     CustomerList.RemoveAt(i);
                     break;
                 }
