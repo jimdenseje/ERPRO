@@ -97,11 +97,12 @@ namespace ERPRO.SalesNS
 
                 Console.WriteLine(""); //new line before showing list
 
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("=== Order Lines  ".PadRight(linelengt, '=')); //give the select list a name sorry unable to edit select list without editing libery so didn't make it pretty
-                Console.ForegroundColor = ConsoleColor.White;
 
-                //Console.CursorVisible = false;
+                //SHOW LIST
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("=== Order Lines  ".PadRight(linelengt, '=')); //give the select list a name sorry unable to edit select list
+                                                                                 //without editing libery so didn't make it pretty
+                Console.ForegroundColor = ConsoleColor.White;
 
                 listPage = new ListPage<SalesOrderLine>();
                 listPage.AddKey(ConsoleKey.F1, addSaleLineOrder);
@@ -113,7 +114,6 @@ namespace ERPRO.SalesNS
                 listPage.Add(SalesOrderLines);
                 var SalesOrderLine = listPage.Select();
 
-                //Console.CursorVisible = true;
                 if (SalesOrderLine != null)
                 {
                     //var viewSalesOrderScreen = new SalesView(SalesOrderLine); TODO
