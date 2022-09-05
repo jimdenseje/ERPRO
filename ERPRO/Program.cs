@@ -129,41 +129,6 @@ Database.Instance.InsertProduct(new Product
     Unit = "fdgh",
 });
 
-//Corporation database instances::
-Database.Instance.InsertCorporation(new Corporation {
-    ID = 1,
-    CorporationName = "Fisketorvet",
-    Country = "Denmark",
-    CityName = "Copenhagen",
-    Zipcode = "3600",
-    RoadName = "Kongensvej",
-    BuildingNumber = "A1",
-    CurrencyCode = CurrencyCode.DKK
-});
-
-Database.Instance.InsertCorporation(new Corporation {
-    ID = 2,
-    CorporationName = "Jensens Fiskebiks",
-    Country = "Denmark",
-    CityName = "Copenhagen",
-    Zipcode = "3600",
-    RoadName = "Kongensvej",
-    BuildingNumber = "A1",
-    CurrencyCode = CurrencyCode.DKK
-});
-
-Database.Instance.InsertCorporation(new Corporation {
-    ID = 3,
-    CorporationName = "Skabsrokken",
-    Country = "Denmark",
-    CityName = "Copenhagen",
-    Zipcode = "3600",
-    RoadName = "Kongensvej",
-    BuildingNumber = "A1",
-    CurrencyCode = CurrencyCode.DKK
-});
-//Corporation Database instance ending::
-
 SalesOrder mySaleOrder = new SalesOrder
 {
     OrderID = 1,
@@ -215,5 +180,6 @@ Console.ForegroundColor = ConsoleColor.DarkCyan;
 Console.WriteLine(intro);
 Console.ForegroundColor = ConsoleColor.White;
 Console.ReadKey();
+Console.CursorVisible = false; //fix for rezising
 
 Screen.Display(new Mainmenu());

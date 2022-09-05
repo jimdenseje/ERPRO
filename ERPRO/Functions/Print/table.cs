@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -68,6 +69,71 @@ namespace ERPRO.Functions.Print
 
         public static void PrintHorizontal(string[,] ShowProperties)
         {
+            string paddingLeft = "  ";
+            int keyLenght = 0;
+            int valueLenght = 0;
+
+            //get max lenght for key and for value
+            for (int i = 0; i < ShowProperties.GetLength(0); i++)
+            {
+                if (ShowProperties[i, 0].Length > keyLenght)
+                {
+                    keyLenght = ShowProperties[i, 0].Length;
+                }
+
+                if (ShowProperties[i, 1].Length > valueLenght)
+                {
+                    valueLenght = ShowProperties[i, 1].Length;
+                }
+
+            }
+
+            keyLenght += 1;
+
+            //add top line on table
+            Console.Write(paddingLeft); //padding left
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            int linelengt = 7 + keyLenght + valueLenght;
+            Console.WriteLine("".PadRight(linelengt, '▒'));
+            Console.ForegroundColor = ConsoleColor.White;
+
+            //add key
+            for (int i = 0; i < ShowProperties.GetLength(0); i++)
+            {
+                //print line above
+                Console.Write(paddingLeft); //padding left
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("█".PadRight(3 + keyLenght, '▀') + "▀");
+                Console.WriteLine("".PadRight(2 + valueLenght, '▀') + "█");
+
+                //print content
+                Console.Write(paddingLeft); //padding left
+                Console.Write("▌ ");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write(ShowProperties[i, 0].PadRight(keyLenght));
+
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("   ");
+
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(ShowProperties[i, 1].PadRight(valueLenght));
+
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(" ▐");
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
+
+            Console.Write(paddingLeft); //padding left
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("".PadRight((7 + keyLenght + valueLenght), '▀'));
+            Console.ForegroundColor = ConsoleColor.White;
+
+        }
+
+        /* old way
+        public static void PrintHorizontal(string[,] ShowProperties)
+        {
             int keyLenght = 0;
             int valueLenght = 0;
 
@@ -103,5 +169,7 @@ namespace ERPRO.Functions.Print
             }
 
         }
+    */
+
     }
 }
