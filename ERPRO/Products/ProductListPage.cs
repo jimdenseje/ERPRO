@@ -33,7 +33,9 @@ namespace ERPRO.ProductNS
                 if (product != null) {
                     var viewProductScreen = new ProductView(product);
                     Screen.Display(viewProductScreen);
+
                     Clear(this); //FIX BY JIM
+                    keyheader.KeyHeader("product"); //added here to fix header when going back from view
                 } else
                 {
                     Clear(this); //FIX BY JIM
@@ -51,6 +53,9 @@ namespace ERPRO.ProductNS
                 Database.Instance.InsertProduct(newProduct);
                 listPage.Add(newProduct);
             }
+
+            Clear(this); //FIX BY JIM
+            keyheader.KeyHeader("product"); //added here to fix header when going back from edit view
         }
 
         void editProduct(Product product)
@@ -58,13 +63,18 @@ namespace ERPRO.ProductNS
             ProductEdit editor = new ProductEdit(product);
             Display(editor);
             Database.Instance.UpdateProduct(product, product.ItemID);
+
+            Clear(this); //FIX BY JIM
+            keyheader.KeyHeader("product"); //added here to fix header when going back from edit view
         }
 
         void deleteProduct(Product product)
         {
             Database.Instance.DeleteProduct(product, product.ItemID);
             listPage.Remove(product);
-            Clear(this);
+
+            Clear(this); //FIX BY JIM
+            keyheader.KeyHeader("product"); //added here to fix header when going back from edit view
         }
     }
 }

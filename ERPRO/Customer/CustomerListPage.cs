@@ -33,9 +33,13 @@ namespace ERPRO.CustomerNS
                 if (customer != null) {
                     var viewCustomerScreen = new CustomerView(customer);
                     Screen.Display(viewCustomerScreen);
-                } else {
+                    Clear(this); //FIX BY JIM
+                    keyheader.KeyHeader("customer"); //added here to fix header when going back from view
+                }
+                else
+                {
+                    Clear(this); //FIX BY JIM
                     Quit();
-                    return;
                 }
             } while (Show);
         }
@@ -47,18 +51,26 @@ namespace ERPRO.CustomerNS
                 Database.Instance.InsertCustomer(newCustomer);
                 listPage.Add(newCustomer);
             }
+
+            Clear(this);
+            keyheader.KeyHeader("customer"); //added here to fix header when going back from edit view
         }
 
         void editCustomer(Customer customer) {
             CustomerEdit editor = new CustomerEdit(customer);
             Display(editor);
             Database.Instance.UpdateCustomer(customer, customer.ID);
+
+            Clear(this);
+            keyheader.KeyHeader("customer"); //added here to fix header when going back from edit view
         }
 
          void deleteCustomer(Customer customer) {
             Database.Instance.DeleteCustomer(customer, customer.ID);
             listPage.Remove(customer);
+
             Clear(this);
+            keyheader.KeyHeader("customer"); //added here to fix header when going back from edit view
         }
     }
 }

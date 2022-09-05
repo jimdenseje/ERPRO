@@ -31,6 +31,7 @@ namespace ERPRO.CorporationNS
                     var viewCorporationScreen = new CorporationView(corporation);
                     Screen.Display(viewCorporationScreen);
                     Clear(this); //FIX BY JIM
+                    keyheader.KeyHeader("corporation"); //added here to fix header when going back from view
                 } else
                 {
                     Clear(this); //FIX BY JIM
@@ -46,18 +47,26 @@ namespace ERPRO.CorporationNS
                 Database.Instance.InsertCorporation(newCorporation);
                 listPage.Add(newCorporation);
             }
+
+            Clear(this);
+            keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }
 
         void editCorporation(Corporation corporation) {
             CorporationEdit editor = new CorporationEdit(corporation);
             Display(editor);
             Database.Instance.UpdateCorporation(corporation, corporation.ID);
+
+            Clear(this);
+            keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }
 
          void deleteCorporation(Corporation corporation) {
             Database.Instance.DeleteCorporation(corporation, corporation.ID);
             listPage.Remove(corporation);
+
             Clear(this);
+            keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }
     }
 }
