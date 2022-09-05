@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ERPRO.Functions.Print;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
 
@@ -17,15 +18,7 @@ namespace ERPRO.SalesNS
             do
             {
                 Clear(this);
-
-                Console.WriteLine();
-                Console.WriteLine("Press F1 to add an item");
-                Console.WriteLine("Press F2 to edit an item");
-                Console.WriteLine("Press F5 to delete an item");
-                Console.WriteLine();
-
-                //Console.CursorVisible = false;
-
+                keyheader.KeyHeader("salesorder");
                 listPage = new ListPage<SalesOrder>();
                 listPage.AddKey(ConsoleKey.F1, addSalesOrder);
                 listPage.AddKey(ConsoleKey.F2, editSalesOrder);
@@ -39,7 +32,6 @@ namespace ERPRO.SalesNS
                 var salesOrders = Database.Instance.GetSalesOrder();
                 listPage.Add(salesOrders);
                 var salesOrder = listPage.Select();
-                //Console.CursorVisible = true;
                 if (salesOrder != null)
                 {
                     var viewSalesOrderScreen = new SalesOrderLinesListPage(salesOrder);

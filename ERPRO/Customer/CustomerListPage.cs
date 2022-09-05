@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.CustomerNS
 {
@@ -16,14 +17,16 @@ namespace ERPRO.CustomerNS
         {   
             do {
                 Clear(this);
+                keyheader.KeyHeader("customer");
                 Customer customer;
                 listPage = new ListPage<Customer>();
                 listPage.AddKey(ConsoleKey.F1, addCustomer);
                 listPage.AddKey(ConsoleKey.F2, editCustomer);
                 listPage.AddKey(ConsoleKey.F5, deleteCustomer);
+                listPage.AddColumn("Customer Number", nameof(customer.CustomerNumber), 20);
                 listPage.AddColumn("Full Name", nameof(customer.FullName), 20);
-                listPage.AddColumn("Address", nameof(customer.Address), 25);
-                listPage.AddColumn("Last Purchase", nameof(customer.LastPurchase), 25);
+                listPage.AddColumn("Phone Number", nameof(customer.PhoneNumber), 20);
+                listPage.AddColumn("E-Mail", nameof(customer.Email), 25);
                 var customers = Database.Instance.GetCustomer();
                 listPage.Add(customers);
                 customer = listPage.Select();
