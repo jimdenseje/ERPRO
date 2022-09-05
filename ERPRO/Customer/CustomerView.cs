@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using TECHCOOL.UI;
 using ERPRO.DatabaseNS;
 using ERPRO.CustomerNS;
+using ERPRO.CorporationNS;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.CustomerNS
 {
@@ -18,12 +20,16 @@ namespace ERPRO.CustomerNS
         protected override void Draw()
         {
             Clear(this);
-            Console.WriteLine($"|             ID | {customer.ID}");
-            Console.WriteLine($"|           Name | {customer.FirstName} {customer.LastName}");
-            Console.WriteLine($"|          Email | {customer.Email}");
-            Console.WriteLine($"|        Address | {customer.Addresse.FullAddress}");
-            Console.WriteLine($"|   Phone Number | {customer.PhoneNumber}");
-            Console.WriteLine($"| CustomerNumber | {customer.CustomerNumber}");
+
+            Console.WriteLine(); //new line
+            table.PrintHorizontal(new string[,] {
+                    {"ID", customer.ID.ToString()},
+                    {"Name", customer.FirstName + " " + customer.LastName},
+                    {"Email", customer.Email},
+                    {"Address",customer.Addresse.FullAddress},
+                    {"Phone Number", customer.PhoneNumber},
+                    {"CustomerNumber", customer.CustomerNumber.ToString()},
+            });
 
         }
     }
