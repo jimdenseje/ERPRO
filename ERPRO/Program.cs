@@ -48,11 +48,15 @@ Database.Instance.InsertCustomer(new Customer
     ID = 1,
     FirstName = "Jim",
     LastName = "Damgaard",
-    Address  = "Øster Uttrupvej 3",
     PhoneNumber = "+4550533174",
     Email = "jimdenseje@gmail.com",
-    CustomerNumber = 1264532,
-    LastPurchase = DateTime.Now
+    CustomerNumber = 12645,
+    LastPurchase = DateTime.Now,
+    Road = "Damsvej",
+    BuildingNumber = "32",
+    ZipCode = "6100",
+    City = "Haderslev",
+    Country = "Denmark",
 });
 //Customer Database instance ending::
 
