@@ -18,7 +18,7 @@ namespace ERPRO.SalesNS
             do
             {
                 Clear(this);
-                keyheader.KeyHeader("item");
+                keyheader.KeyHeader("salesorder");
                 listPage = new ListPage<SalesOrder>();
                 listPage.AddKey(ConsoleKey.F1, addSalesOrder);
                 listPage.AddKey(ConsoleKey.F2, editSalesOrder);
