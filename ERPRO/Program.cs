@@ -58,6 +58,22 @@ Database.Instance.InsertCustomer(new Customer
     City = "Haderslev",
     Country = "Denmark",
 });
+
+Database.Instance.InsertCustomer(new Customer
+{
+    ID = 2,
+    FirstName = "jonas",
+    LastName = "luuk",
+    PhoneNumber = "+456456443",
+    Email = "jfd@gmail.com",
+    CustomerNumber = 12645,
+    LastPurchase = DateTime.Now,
+    Road = "Damsvej",
+    BuildingNumber = "32",
+    ZipCode = "6100",
+    City = "Haderslev",
+    Country = "Denmark",
+});
 //Customer Database instance ending::
 
 //Product Database instance::
