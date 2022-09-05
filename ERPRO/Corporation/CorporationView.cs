@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
-using ERPRO.DatabaseNS;
-using ERPRO.ProductNS;
 using ERPRO.Functions.Print;
 
 namespace ERPRO.CorporationNS

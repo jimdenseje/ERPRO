@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ERPRO.CorporationNS;
 using ERPRO.ProductNS;
 
 namespace ERPRO.DatabaseNS
