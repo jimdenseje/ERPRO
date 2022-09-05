@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ERPRO.Functions.Print;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
 
@@ -15,6 +16,7 @@ namespace ERPRO.ProductNS
         {   
             do {
                 Clear(this);
+                keyheader.KeyHeader("product");
                 listPage = new ListPage<Product>();
                 var products = Database.Instance.GetAllProducts();
                 listPage.Add(products);

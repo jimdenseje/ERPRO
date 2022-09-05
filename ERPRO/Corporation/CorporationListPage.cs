@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.CorporationNS
 {
@@ -15,6 +16,7 @@ namespace ERPRO.CorporationNS
         {   
             do {
                 Clear(this);
+                keyheader.KeyHeader("corporation");
                 listPage = new ListPage<Corporation>();
                 listPage.AddKey(ConsoleKey.F1, addCorporation);
                 listPage.AddKey(ConsoleKey.F2, editCorporation);
