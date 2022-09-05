@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
 using ERPRO.DatabaseNS;
+using ERPRO.SalesNS;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.ProductNS
 {
@@ -18,12 +20,18 @@ namespace ERPRO.ProductNS
         protected override void Draw()
         {
             Clear(this);
-            Console.WriteLine($"|             ID | {product.ItemID}");
-            Console.WriteLine($"|           Name | {product.Name}");
-            Console.WriteLine($"|    Storage QTY | {product.Quantity}");
-            Console.WriteLine($"| Purchase Price | {product.PurchasePrice}");
-            Console.WriteLine($"|  Selling Price | {product.SellingPrice}");
-            Console.WriteLine($"|         Profit | {product.Profit}");
+
+            Console.WriteLine(); //new line
+
+            table.PrintHorizontal(new string[,] {
+                    {"Order ID", product.ItemID.ToString()},
+                    {"Created", product.Name.ToString()},
+                    {"Accepted", product.Quantity.ToString()},
+                    {"Customer ID", product.PurchasePrice.ToString()},
+                    {"Customer Name", product.SellingPrice.ToString()},
+                    {"Order Price", product.Profit.ToString()},
+                    {"Status", product.Unit},
+            });
         }
     }
 }

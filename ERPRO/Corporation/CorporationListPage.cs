@@ -28,9 +28,11 @@ namespace ERPRO.CorporationNS
                 if (corporation != null) {
                     var viewCorporationScreen = new CorporationView(corporation);
                     Screen.Display(viewCorporationScreen);
-                } else {
+                    Clear(this); //FIX BY JIM
+                } else
+                {
+                    Clear(this); //FIX BY JIM
                     Quit();
-                    return;
                 }
             } while (Show);
         }

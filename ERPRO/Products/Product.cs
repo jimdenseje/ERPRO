@@ -7,6 +7,22 @@ using ERPRO.AddressNS;
 
 namespace ERPRO.ProductNS
 {
+    /*
+    public class ProductUnit
+    {
+        public string[] Unit { get; } = { "Volvo", "BMW", "Ford", "Mazda" };
+        public static ProductUnit Instance { get; } = new ProductUnit();
+    }
+    */
+
+    public enum ProductUnit
+    {
+        Meter,
+        Centimeter,
+        Quantity,
+        Litre
+    }
+
     public class Product
     {
         public int ItemID { get; set; }

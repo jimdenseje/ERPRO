@@ -12,6 +12,7 @@ namespace ERPRO.CorporationNS
         USD,
         EUR
     }
+
     public class Corporation
     {
         public int ID { get; set; }
