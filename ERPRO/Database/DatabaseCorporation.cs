@@ -3,37 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.CorporationNS;
-using System.Data.SqlClient;
 
 namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {
-        List<Corporation> list = new List<Corporation>();
-        static int nextId = 0;
+        public static Database Instance { get; } = new Database();
 
-        public void InsertCorporation(Corporation corp) {
-            list.Add(corp);
-            corp.ID = nextId++;
-        }
-
-        public Corporation FindCorporation(int id) {
-            Corporation corporation = new Corporation();
-            using (var connection = getConnection())
-            {
-                var command = connection.CreateCommand(); 
-                command.CommandText = "SELECT CorporationName FROM corporation WHERE ID=" + id;
-                var reader = command.ExecuteReader();
-                reader.Read();
-                corporation.ID = reader.GetInt32(0);
-                corporation.CorporationName  = reader.GetString(1);
-            };
-            return corporation;
-        }
+        public static List<Corporation> CorporationList { get; } = new List<Corporation>();
 
         public Corporation GetCorporation(int id) {
             Corporation result = null;
-            foreach (var corporation in list)
+            foreach (var corporation in CorporationList)
             {
                 if (id == corporation.ID) {
                     result = corporation;
@@ -45,29 +26,34 @@ namespace ERPRO.DatabaseNS
 
         public List<Corporation> GetCorporation() {
             List<Corporation> corporations = new List<Corporation>();
-            foreach (var corp in list) {
-                corporations.Add(corp);
+            foreach (var crp in CorporationList) {
+                corporations.Add(crp);
             }
             return corporations;
         }
 
+        public Corporation InsertCorporation(Corporation corporation) {
+            CorporationList.Add(corporation);
+            return corporation;
+        }
 
         public void UpdateCorporation(Corporation corporation, int id) {
-            for (int i = 0; i < list.Count; i++) {
-                if (list[i].ID == id) {
-                    list[i] = corporation;
+            for (int i = 0; i < CorporationList.Count; i++) {
+                if (CorporationList[i].ID == id) {
+                    CorporationList[i] = corporation;
                     break;
                 }
             }
         }
 
-        public bool DeleteCorporation(Corporation corp) {
-            using (var connection = getConnection()) {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "DELETE FROM corporation WHERE ID=" + corp.ID;
-                int deleted = command.ExecuteNonQuery();
-                return deleted > 0;
+        public void DeleteCorporation(Corporation corporation, int id) {
+            for (int i = 0; i < CorporationList.Count; i++) {
+                if (CorporationList[i].ID == id) {
+                    CorporationList.RemoveAt(i);
+                    break;
             }
         }
+    }
+
     }
 }
