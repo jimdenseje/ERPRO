@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.CustomerNS;
+using ERPRO.Functions.Print;
 using ERPRO.DatabaseNS;
 using ERPRO.ProductNS;
 using TECHCOOL.UI;
@@ -27,6 +28,9 @@ namespace ERPRO.SalesNS
                 Console.WriteLine();
 
                 //Console.CursorVisible = false;
+                keyheader.KeyHeader("salesorder");
+
+
                 listPage = new ListPage<SalesOrder>();
                 listPage.AddKey(ConsoleKey.F1, addSalesOrder);
                 listPage.AddKey(ConsoleKey.F2, editSalesOrder);
@@ -39,7 +43,6 @@ namespace ERPRO.SalesNS
                 var salesOrders = Database.Instance.GetSalesOrder();
                 listPage.Add(salesOrders);
                 var salesOrder = listPage.Select();
-                //Console.CursorVisible = true;
                 if (salesOrder != null)
                 {
                     var viewSalesOrderScreen = new SalesOrderLinesListPage(salesOrder);

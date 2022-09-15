@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.CustomerNS
 {
@@ -16,23 +17,29 @@ namespace ERPRO.CustomerNS
         {   
             do {
                 Clear(this);
+                keyheader.KeyHeader("customer");
                 Customer customer;
                 listPage = new ListPage<Customer>();
                 listPage.AddKey(ConsoleKey.F1, addCustomer);
                 listPage.AddKey(ConsoleKey.F2, editCustomer);
                 listPage.AddKey(ConsoleKey.F5, deleteCustomer);
+                listPage.AddColumn("Customer Number", nameof(customer.CustomerNumber), 20);
                 listPage.AddColumn("Full Name", nameof(customer.FullName), 20);
-                listPage.AddColumn("Address", nameof(customer.Address), 25);
-                listPage.AddColumn("Last Purchase", nameof(customer.LastPurchase), 25);
+                listPage.AddColumn("Phone Number", nameof(customer.PhoneNumber), 20);
+                listPage.AddColumn("E-Mail", nameof(customer.Email), 25);
                 var customers = Database.Instance.GetCustomer();
                 listPage.Add(customers);
                 customer = listPage.Select();
                 if (customer != null) {
                     var viewCustomerScreen = new CustomerView(customer);
                     Screen.Display(viewCustomerScreen);
-                } else {
+                    Clear(this); //FIX BY JIM
+                    keyheader.KeyHeader("customer"); //added here to fix header when going back from view
+                }
+                else
+                {
+                    Clear(this); //FIX BY JIM
                     Quit();
-                    return;
                 }
             } while (Show);
         }
@@ -44,18 +51,26 @@ namespace ERPRO.CustomerNS
                 Database.Instance.InsertCustomer(newCustomer);
                 listPage.Add(newCustomer);
             }
+
+            Clear(this);
+            keyheader.KeyHeader("customer"); //added here to fix header when going back from edit view
         }
 
         void editCustomer(Customer customer) {
             CustomerEdit editor = new CustomerEdit(customer);
             Display(editor);
             Database.Instance.UpdateCustomer(customer, customer.ID);
+
+            Clear(this);
+            keyheader.KeyHeader("customer"); //added here to fix header when going back from edit view
         }
 
          void deleteCustomer(Customer customer) {
             Database.Instance.DeleteCustomer(customer, customer.ID);
             listPage.Remove(customer);
+
             Clear(this);
+            keyheader.KeyHeader("customer"); //added here to fix header when going back from edit view
         }
     }
 }

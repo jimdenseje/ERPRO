@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
-using ERPRO.DatabaseNS;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.CorporationNS
 {
@@ -17,14 +17,19 @@ namespace ERPRO.CorporationNS
         protected override void Draw()
         {
             Clear(this);
-            Console.WriteLine($"|       ID | {corporation.ID}");
-            Console.WriteLine($"|     Name | {corporation.CorporationName}");
-            Console.WriteLine($"|  Country | {corporation.Country}");
-            Console.WriteLine($"|     City | {corporation.CityName}");
-            Console.WriteLine($"| Zip Code | {corporation.Zipcode}");
-            Console.WriteLine($"|     Road | {corporation.RoadName}");
-            Console.WriteLine($"| Building | {corporation.BuildingNumber}");
-            Console.WriteLine($"| Currency | {corporation.CurrencyCode}");
+            Console.WriteLine(); //new line
+
+            table.PrintHorizontal(new string[,] {
+                    {"ID", corporation.ID.ToString()},
+                    {"Name", corporation.CorporationName},
+                    {"Country", corporation.Country},
+                    {"City", corporation.CityName},
+                    {"Zip Code", corporation.Zipcode},
+                    {"Road", corporation.RoadName},
+                    {"Building", corporation.BuildingNumber},
+                    {"Currency", corporation.CurrencyCode.ToString()},
+            });
+
         }
     }
 }

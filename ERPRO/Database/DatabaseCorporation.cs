@@ -51,9 +51,9 @@ namespace ERPRO.DatabaseNS
                 if (CorporationList[i].ID == id) {
                     CorporationList.RemoveAt(i);
                     break;
-                }
             }
         }
+    }
 
     }
 }

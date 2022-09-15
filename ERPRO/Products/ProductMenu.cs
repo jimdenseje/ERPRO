@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
 using ERPRO.ProductNS;
-using ERPRO.DatabaseNS;
 
 
     public class ProductMenu : Screen

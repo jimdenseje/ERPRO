@@ -46,45 +46,45 @@ namespace ERPRO.SalesNS
     }
 
     //Jim made a decision, DRAW LISTPAGE cant list probs in a objects object property and i want to show SaleQty as well
-    //public class SalesOrderLine 
-    //{
-    //    public SalesOrderLine(Product product, decimal qty) {
-    //        this.Product = product;
-    //        this.SaleQty = qty;
-    //    }
-    //    public Product Product { get; private set; }
-    //    public decimal SaleQty { get; set; }
-    //}
+    public class SalesOrderLine 
+    {
+       public SalesOrderLine(Product product) {
+           this.Product = product;
+       }
+       public Product Product { get; set; }
+       public decimal SellingPrice { get => Product.SellingPrice; set => Product.SellingPrice = value; }
+       public decimal SaleQty { get; set; }
+    }
 
     //TODO REFRACTOR EVERYTING NO LISTS IN ANY CLASS DOSN'T WORK WITH FRAMEWORK :( ADD SalesOrderLine TO DB (GET SET)
 
-    public class SalesOrderLine : Product
-    {
+    // public class SalesOrderLine : Product
+    // {
 
-        public SalesOrderLine(Product product)
-        {
-            //REF https://github.com/jitbit/PropMapper
-            PropMapper<Product, SalesOrderLine>.CopyTo(product, this);
-        }
+    //     public SalesOrderLine(Product product)
+    //     {
+    //         //REF https://github.com/jitbit/PropMapper
+    //         PropMapper<Product, SalesOrderLine>.CopyTo(product, this);
+    //     }
 
-        public decimal SaleQty { get; set; }
+    //     public decimal SaleQty { get; set; }
 
-        //insted of
-        /*
-        public SalesOrderLine(Product product)
-        {
-            this.ItemID = product.ItemID;
-            this.Name = product.Name;
-            this.Description = product.Description;
-            this.SellingPrice = product.SellingPrice;
-            this.PurchasePrice = product.PurchasePrice;
-            this.Location = product.Location;
-            this.Quantity = product.Quantity;
-            this.Unit = product.Unit;
-        }
+    //     //insted of
+    //     /*
+    //     public SalesOrderLine(Product product)
+    //     {
+    //         this.ItemID = product.ItemID;
+    //         this.Name = product.Name;
+    //         this.Description = product.Description;
+    //         this.SellingPrice = product.SellingPrice;
+    //         this.PurchasePrice = product.PurchasePrice;
+    //         this.Location = product.Location;
+    //         this.Quantity = product.Quantity;
+    //         this.Unit = product.Unit;
+    //     }
 
-        I admit it took me some time to figure this out (DAMED OOP), i guess that is how it goes when you set a stuborn producional programmer to create OOP Code
-        */
-    }
+    //     I admit it took me some time to figure this out (DAMED OOP), i guess that is how it goes when you set a stuborn producional programmer to create OOP Code
+    //     */
+    // }
 
 }

@@ -9,11 +9,16 @@ namespace ERPRO.CustomerNS
 {
     public class Customer : Person
     {
-        public int ID { get; set; }
         public int CustomerNumber { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public Address Address { get; set; }
         public DateTime LastPurchase { get; set; }
+        public string Road { get => Addresse.Road; set => Addresse.Road = value; }
+        public string BuildingNumber { get => Addresse.BuildingNumber; set => Addresse.BuildingNumber = value; }
+        public string ZipCode { get => Addresse.ZipCode; set => Addresse.ZipCode = value; }
+        public string City { get => Addresse.City; set => Addresse.City = value; }
+        public string Country { get => Addresse.Country; set => Addresse.Country = value; }
+        public string FullAddress { get => Addresse.FullAddress; }
     }
 }

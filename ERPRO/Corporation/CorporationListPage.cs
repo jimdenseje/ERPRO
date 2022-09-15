@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.CorporationNS
 {
@@ -15,6 +16,7 @@ namespace ERPRO.CorporationNS
         {   
             do {
                 Clear(this);
+                keyheader.KeyHeader("corporation");
                 listPage = new ListPage<Corporation>();
                 listPage.AddKey(ConsoleKey.F1, addCorporation);
                 listPage.AddKey(ConsoleKey.F2, editCorporation);
@@ -28,9 +30,12 @@ namespace ERPRO.CorporationNS
                 if (corporation != null) {
                     var viewCorporationScreen = new CorporationView(corporation);
                     Screen.Display(viewCorporationScreen);
-                } else {
+                    Clear(this); //FIX BY JIM
+                    keyheader.KeyHeader("corporation"); //added here to fix header when going back from view
+                } else
+                {
+                    Clear(this); //FIX BY JIM
                     Quit();
-                    return;
                 }
             } while (Show);
         }
@@ -42,18 +47,26 @@ namespace ERPRO.CorporationNS
                 Database.Instance.InsertCorporation(newCorporation);
                 listPage.Add(newCorporation);
             }
+
+            Clear(this);
+            keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }
 
         void editCorporation(Corporation corporation) {
             CorporationEdit editor = new CorporationEdit(corporation);
             Display(editor);
             Database.Instance.UpdateCorporation(corporation, corporation.ID);
+
+            Clear(this);
+            keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }
 
          void deleteCorporation(Corporation corporation) {
-            Database.Instance.DeleteCorporation(corporation, corporation.ID);
+            Database.Instance.DeleteCorporation(corporation);
             listPage.Remove(corporation);
+
             Clear(this);
+            keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }
     }
 }

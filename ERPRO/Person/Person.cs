@@ -10,7 +10,6 @@ namespace ERPRO.PersonNS
 {
     public class Person : Address
     {
-
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,6 +23,10 @@ namespace ERPRO.PersonNS
         private string GetFullName()
         {
             return FirstName + " " + LastName;
+        }
+
+        protected Person () {
+            Addresse = new Address();
         }
     }
 
