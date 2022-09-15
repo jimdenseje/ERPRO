@@ -9,9 +9,6 @@ namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {
-        //public static Database Instance { get; } = new Database();
-
-        public static List<Corporation> CorporationList { get; } = new List<Corporation>();
         List<Corporation> list = new List<Corporation>();
         static int nextId = 0;
 
@@ -20,12 +17,12 @@ namespace ERPRO.DatabaseNS
             corp.ID = nextId++;
         }
 
-        public Corporation FindCompany(int id) {
+        public Corporation FindCorporation(int id) {
             Corporation corporation = new Corporation();
             using (var connection = getConnection())
             {
                 var command = connection.CreateCommand(); 
-                command.CommandText = "SELECT CorporationName FROM company WHERE ID=" + id;
+                command.CommandText = "SELECT CorporationName FROM corporation WHERE ID=" + id;
                 var reader = command.ExecuteReader();
                 reader.Read();
                 corporation.ID = reader.GetInt32(0);
@@ -36,7 +33,7 @@ namespace ERPRO.DatabaseNS
 
         public Corporation GetCorporation(int id) {
             Corporation result = null;
-            foreach (var corporation in CorporationList)
+            foreach (var corporation in list)
             {
                 if (id == corporation.ID) {
                     result = corporation;
@@ -48,17 +45,17 @@ namespace ERPRO.DatabaseNS
 
         public List<Corporation> GetCorporation() {
             List<Corporation> corporations = new List<Corporation>();
-            foreach (var crp in CorporationList) {
-                corporations.Add(crp);
+            foreach (var corp in list) {
+                corporations.Add(corp);
             }
             return corporations;
         }
 
 
         public void UpdateCorporation(Corporation corporation, int id) {
-            for (int i = 0; i < CorporationList.Count; i++) {
-                if (CorporationList[i].ID == id) {
-                    CorporationList[i] = corporation;
+            for (int i = 0; i < list.Count; i++) {
+                if (list[i].ID == id) {
+                    list[i] = corporation;
                     break;
                 }
             }
