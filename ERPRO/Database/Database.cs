@@ -34,8 +34,8 @@ namespace ERPRO.DatabaseNS
                             ....
                             PRIMARY KEY(ID)
                             )",
-                            @"CREATE TABLE customer (.....)",
-                            @"CREATE TABLE products (.....)",
+                @"CREATE TABLE customer (.....)",
+                @"CREATE TABLE products (.....)",
             };
 
             using (var conn = getConnection()) {
