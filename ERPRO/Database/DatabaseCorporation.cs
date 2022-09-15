@@ -8,8 +8,6 @@ namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {
-        public static Database Instance { get; } = new Database();
-
         public static List<Corporation> CorporationList { get; } = new List<Corporation>();
 
         public Corporation GetCorporation(int id) {
