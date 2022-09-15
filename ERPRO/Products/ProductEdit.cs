@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TECHCOOL.UI;
 using ERPRO.DatabaseNS;
 using ERPRO.ProductNS;
+using ERPRO.AddressNS;
 
 namespace ERPRO.ProductNS
 {
@@ -24,9 +25,14 @@ namespace ERPRO.ProductNS
             edit.TextBox("Description", nameof(product.Description));
             edit.TextBox("Selling Price", nameof(product.SellingPrice));
             edit.TextBox("Purchase Price", nameof(product.PurchasePrice));
-            edit.TextBox("Location", nameof(product.Location));
-            edit.TextBox("Quantity", nameof(product.Quantity));
 
+            //TODO Has to be dynamic and not hardcoded
+            edit.SelectBox("Storage", nameof(product.LocationID));
+            edit.AddOption("Storage", "Aarhus Lager", 1);
+            edit.AddOption("Storage", "Odense Lager", 2);
+            edit.AddOption("Storage", "Tønder Lager", 3);
+            
+            edit.TextBox("Quantity", nameof(product.Quantity));
             edit.SelectBox("Unit", nameof(product.Unit));
             edit.AddOption("Unit", "Centimeter", ProductUnit.Centimeter.ToString());
             edit.AddOption("Unit", "Litre", ProductUnit.Litre.ToString());

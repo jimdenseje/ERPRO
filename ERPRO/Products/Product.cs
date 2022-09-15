@@ -4,16 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ERPRO.AddressNS;
+using ERPRO.DatabaseNS;
 
 namespace ERPRO.ProductNS
 {
-    /*
-    public class ProductUnit
-    {
-        public string[] Unit { get; } = { "Volvo", "BMW", "Ford", "Mazda" };
-        public static ProductUnit Instance { get; } = new ProductUnit();
-    }
-    */
 
     public enum ProductUnit
     {
@@ -35,16 +29,26 @@ namespace ERPRO.ProductNS
         public string Unit { get; set; }    
         public decimal ProfitInPercentage { get => GetProfitInPercentage();}
         public decimal Profit { get => GetProfit();}
-       
+        private int locationID;
+        public int LocationID {
+            get {return locationID;}
+            set {
+                Location = Database.Instance.GetAddress(value);
+                locationID = value;
+            }
+        }
+
         private decimal GetProfit()
         {
            return SellingPrice - PurchasePrice;
         }
-
         private decimal GetProfitInPercentage()
         { 
             return (PurchasePrice / 100) * GetProfit();
         }
+        public string FullAddress { get => Location.FullAddress; }
+        public Product (int ID) {
+            Location = Database.Instance.GetAddress(ID);
+        }
     }
-
 }

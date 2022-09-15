@@ -29,6 +29,7 @@ namespace ERPRO.ProductNS
                     {"Customer Name", product.SellingPrice.ToString()},
                     {"Order Price", product.Profit.ToString()},
                     {"Status", product.Unit},
+                    {"Location", product.FullAddress.ToString()},
             });
         }
     }

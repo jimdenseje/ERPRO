@@ -62,7 +62,7 @@ namespace ERPRO.CorporationNS
         }
 
          void deleteCorporation(Corporation corporation) {
-            Database.Instance.DeleteCorporation(corporation, corporation.ID);
+            Database.Instance.DeleteCorporation(corporation);
             listPage.Remove(corporation);
 
             Clear(this);
