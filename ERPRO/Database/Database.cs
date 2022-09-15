@@ -62,7 +62,5 @@ namespace ERPRO.DatabaseNS
                 connection.Dispose();
             }
         }
-
-        //Query eksempel:: SELECT Top ' * FROM Company
     }
 }
