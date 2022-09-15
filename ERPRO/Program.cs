@@ -43,16 +43,24 @@ Database.Instance.InsertCorporation(new Corporation {
 //Corporation Database instance ending::
 
 //Customer Database instance::
-Database.Instance.InsertCustomer(new Customer
+Address jimsaddress = new Address
+{
+    ZipCode = "9640",
+    Road = "Statinonsvej",
+    BuildingNumber = "8",
+    City = "Farsø",
+    Country = "Denmark",
+};
+    Database.Instance.InsertCustomer(new Customer
 {
     ID = 1,
     FirstName = "Jim",
     LastName = "Damgaard",
-    Address  = "Øster Uttrupvej 3",
     PhoneNumber = "+4550533174",
     Email = "jimdenseje@gmail.com",
     CustomerNumber = 1264532,
-    LastPurchase = DateTime.Now
+    LastPurchase = DateTime.Now,
+    Address = jimsaddress,
 });
 //Customer Database instance ending::
 
@@ -147,9 +155,14 @@ Database.Instance.InsertCorporation(new Corporation {
 SalesOrder mySaleOrder = new SalesOrder
 {
     OrderID = 1,
+    FirstName = "Jim",
+    LastName = "Damgaard",
+    ZipCode = "9640",
+    Road = "Statinonsvej",
+    PhoneNumber = "21830475",
     TimeOfCreation = DateTime.Now,
     TimeOfAcceptance = DateTime.Now,
-    Status = Status.Confirmed,
+    status = "Confirmed",
     CustomerID = 1,
 };
 mySaleOrder.AddSalesOrderLine(Database.Instance.GetProductFromID(1), 2);
@@ -160,7 +173,7 @@ mySaleOrder = new SalesOrder
     OrderID = 2,
     TimeOfCreation = DateTime.Now,
     TimeOfAcceptance = DateTime.Now,
-    Status = Status.Packed,
+    status = "Packed",
     CustomerID = 2,
 };
 mySaleOrder.AddSalesOrderLine(Database.Instance.GetProductFromID(2), 1);

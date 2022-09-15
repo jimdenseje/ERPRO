@@ -4,22 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.ProductNS;
 using ERPRO.Functions.Objects;
+using ERPRO.PersonNS;
+
 namespace ERPRO.SalesNS
 {
-    public enum Status {
-        None,
-        Created,
-        Confirmed,
-        Packed
-    }
 
-    public class SalesOrder
+
+    public class SalesOrder : Person
     {
+        public enum Status {
+            None,
+            Created,
+            Confirmed,
+            Packed
+        }
+
+        public Person person { get; set; }
         public int OrderID { get; set; }
         public DateTime TimeOfCreation { get; set; }
         public DateTime TimeOfAcceptance { get; set; }
         public int CustomerID { get; set; }
-        public Status Status { get; set; }
+        public string status { get; set; }
         public List<SalesOrderLine> OrderLines { get; } = new List<SalesOrderLine>();
 
         public decimal TotalPrice { get => GetTotalPrice(); }

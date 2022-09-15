@@ -10,6 +10,9 @@ namespace ERPRO.ProductNS
     public class ProductListPage : Screen
     {
         ListPage<Product> listPage;
+
+        public int ProductPicker { get; set; }
+
         public override string Title { get; set; } = "Products";
         protected override void Draw()
         {   
@@ -26,6 +29,7 @@ namespace ERPRO.ProductNS
                 listPage.AddColumn("Return in percent", nameof(Product.ProfitInPercentage), 20);
                 var product = listPage.Select();
                 if (product != null) {
+                    ProductPicker = product.ItemID;
                     var viewProductScreen = new ProductView(product);
                     Screen.Display(viewProductScreen);
                 } else {

@@ -39,7 +39,7 @@ namespace ERPRO.SalesNS
                     {"Customer ID", salesOrder.CustomerID.ToString(), "0"},
                     {"Customer Name", Database.Instance.GetCustomer(salesOrder.CustomerID).FullName, "0"},
                     {"Order Price", salesOrder.TotalPrice.ToString(), "0"},
-                    {"Status", salesOrder.Status.ToString(), "0"},
+                    {"Status", salesOrder.status.ToString(), "0"},
                 };
 
                 //if chars lengt in ShowProperties[?, 0 OR 1] > ShowProperties[?, 2] Edit ShowProperties[?, 2] to match max string width

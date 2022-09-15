@@ -21,7 +21,7 @@ namespace ERPRO.CustomerNS
             Console.WriteLine($"|             ID | {customer.ID}");
             Console.WriteLine($"|           Name | {customer.FirstName} {customer.LastName}");
             Console.WriteLine($"|          Email | {customer.Email}");
-            Console.WriteLine($"|        Address | {customer.Address}");
+            Console.WriteLine($"|        Address | {customer.Road} {customer.BuildingNumber}");
             Console.WriteLine($"|   Phone Number | {customer.PhoneNumber}");
             Console.WriteLine($"| CustomerNumber | {customer.CustomerNumber}");
 

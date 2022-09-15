@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ERPRO.CustomerNS;
 using ERPRO.DatabaseNS;
+using ERPRO.ProductNS;
 using TECHCOOL.UI;
 
 namespace ERPRO.SalesNS
@@ -25,17 +27,15 @@ namespace ERPRO.SalesNS
                 Console.WriteLine();
 
                 //Console.CursorVisible = false;
-
                 listPage = new ListPage<SalesOrder>();
                 listPage.AddKey(ConsoleKey.F1, addSalesOrder);
                 listPage.AddKey(ConsoleKey.F2, editSalesOrder);
                 listPage.AddKey(ConsoleKey.F5, deleteSalesOrder);
-                listPage.AddColumn("Order ID", "OrderID", 10);
-                listPage.AddColumn("Customer ID", "CustomerID", 12);
+                listPage.AddColumn("Customer ID", nameof(SalesOrder.CustomerID), 12);
                 listPage.AddColumn("Total Price", "TotalPrice", 12);
                 listPage.AddColumn("Time Of Creation", "TimeOfCreation", 22);
                 listPage.AddColumn("Time Of Acceptance", "TimeOfAcceptance", 22);
-                listPage.AddColumn("Status", "Status", 12);
+                listPage.AddColumn("Status", "status", 12);
                 var salesOrders = Database.Instance.GetSalesOrder();
                 listPage.Add(salesOrders);
                 var salesOrder = listPage.Select();
@@ -57,14 +57,54 @@ namespace ERPRO.SalesNS
         }
         void addSalesOrder(SalesOrder _)
         {
+            Clear(this);
+
+            SalesCustomerPicker chooseCustomer = new SalesCustomerPicker();
+            Display(chooseCustomer);
+
+
+            SalesProductPicker chooseProduct = new SalesProductPicker();
+            Display(chooseProduct);
+
+            /*
+            Console.WriteLine("Edit Exesisten Customer");
+            Console.WriteLine("Edit New Customer");
+            string key = Console.ReadLine();
+            if (key == "1")
+            {
+
+            }
+            if (key == "2")
+            {
+
+            }
+            */
+
+
             SalesOrder newSalesOrder = new SalesOrder();
+            newSalesOrder.CustomerID = chooseCustomer.lastpicker;
             SalesEdit editor = new SalesEdit(newSalesOrder);
             Display(editor);
-            if (newSalesOrder.CustomerID != 0)
+
+                if (newSalesOrder.FirstName != "")
+                {
+                    Database.Instance.InsertSaleOrder(newSalesOrder);
+                    listPage.Add(newSalesOrder);
+                }
+
+
+
+            SalesOrder newProduct = new SalesOrder();
+            newProduct.CustomerID = chooseProduct.ProductPicker;
+            SalesEdit salesEdit = new SalesEdit(newProduct);
+            Display(salesEdit);
+
+            if (newProduct.FirstName != "")
             {
-                Database.Instance.InsertSaleOrder(newSalesOrder);
-                listPage.Add(newSalesOrder);
+                Database.Instance.InsertSaleOrder(newProduct);
+                listPage.Add(newProduct);
             }
+
         }
 
         void editSalesOrder(SalesOrder salesOrder)
