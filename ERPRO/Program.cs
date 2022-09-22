@@ -7,41 +7,6 @@ using ERPRO.ProductNS;
 using ERPRO.AddressNS;
 using ERPRO.SalesNS;
 
-//Corporation database instances::
-Database.Instance.InsertCorporation(new Corporation {
-    ID = 1,
-    CorporationName = "Fisketorvet",
-    Country = "Denmark",
-    CityName = "Copenhagen",
-    Zipcode = "3600",
-    RoadName = "Kongensvej",
-    BuildingNumber = "A1",
-    CurrencyCode = CurrencyCode.DKK
-});
-
-Database.Instance.InsertCorporation(new Corporation {
-    ID = 2,
-    CorporationName = "Jensens Fiskebiks",
-    Country = "Denmark",
-    CityName = "Copenhagen",
-    Zipcode = "3600",
-    RoadName = "Kongensvej",
-    BuildingNumber = "A1",
-    CurrencyCode = CurrencyCode.DKK
-});
-
-Database.Instance.InsertCorporation(new Corporation {
-    ID = 3,
-    CorporationName = "Skabsrokken",
-    Country = "Denmark",
-    CityName = "Copenhagen",
-    Zipcode = "3600",
-    RoadName = "Kongensvej",
-    BuildingNumber = "A1",
-    CurrencyCode = CurrencyCode.DKK
-});
-//Corporation Database instance ending::
-
 //Customer Database instance::
 Database.Instance.InsertCustomer(new Customer
 {
@@ -75,44 +40,6 @@ Database.Instance.InsertCustomer(new Customer
     Country = "Denmark",
 });
 //Customer Database instance ending::
-
-//Storage instance::
-Database.Instance.InsertAddress(new Address {
-    ID = 0,
-    Country = "",
-    City = "",
-    ZipCode = "",
-    BuildingNumber = "",
-    Road = "",
-    LocationName = "No Storage"
-});
-Database.Instance.InsertAddress(new Address {
-    ID = 1,
-    Country = "Danmark",
-    City = "Aarhus",
-    ZipCode = "6666",
-    BuildingNumber = "34",
-    Road = "Karolinevej",
-    LocationName = "Aarhus Lager"
-});
-Database.Instance.InsertAddress(new Address {
-    ID = 2,
-    Country = "Danmark",
-    City = "Odense",
-    ZipCode = "4560",
-    BuildingNumber = "A2",
-    Road = "Sveltevej",
-    LocationName = "Odense Lager"
-});
-Database.Instance.InsertAddress(new Address {
-    ID = 3,
-    Country = "Danmark",
-    City = "Tønder",
-    ZipCode = "2344",
-    BuildingNumber = "3",
-    Road = "Grænsevej",
-    LocationName = "Tønder Lager"
-});
 
 //Product Database instance::
 Database.Instance.InsertProduct(new Product(1) {

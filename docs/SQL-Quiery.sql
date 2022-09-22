@@ -43,9 +43,9 @@ CREATE TABLE Product (
     StorageID INT FOREIGN KEY REFERENCES Addresse(ID) NOT NULL,
     QTY DECIMAL NOT NULL,
     UNIT VARCHAR(max) NOT NULL,
-    CONSTRAINT UQ_Product UNIQUE NONCLUSTERED(
-        ItemName, StorageID
-    )
+    -- CONSTRAINT UQ_Product UNIQUE NONCLUSTERED(
+    --     ItemName, StorageID
+    -- )
 );
 
 CREATE TABLE SaleOrder (
@@ -65,9 +65,9 @@ CREATE TABLE SalesOrderLineProduct (
     StorageID INT FOREIGN KEY REFERENCES Addresse(ID) NOT NULL,
     QTY DECIMAL NOT NULL,
     UNIT VARCHAR(max) NOT NULL,
-    CONSTRAINT UQ_Product UNIQUE NONCLUSTERED(
-        ItemName, StorageID
-    )
+    -- CONSTRAINT UQ_Product UNIQUE NONCLUSTERED(
+    --     ItemName, StorageID
+    -- )
 );
 
 CREATE TABLE SaleOrderLine (

@@ -16,12 +16,14 @@ namespace ERPRO.CorporationNS
     public class Corporation
     {
         public int ID { get; set; }
+        public int AddresseID { get; set; }
         public string CorporationName { get; set; }
         public string RoadName { get; set; }
         public string BuildingNumber { get; set; }
         public string Zipcode { get; set; }
         public string CityName { get; set; }
         public string Country { get; set; }
+        public string LocationName { get; set; }
         public CurrencyCode CurrencyCode { get; set; }   
     }
 }
