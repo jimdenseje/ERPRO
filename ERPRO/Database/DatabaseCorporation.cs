@@ -70,11 +70,10 @@ namespace ERPRO.DatabaseNS
 
         public void UpdateCorporation(Corporation corporation) {
             using (var connection = getConnection()){
-                string currencycode = corporation.CurrencyCode.ToString();
                 var command = connection.CreateCommand();
                 command.CommandText =
                 @$"UPDATE Corporation
-                SET CorporationName = '{corporation.CorporationName}', Currency = '{currencycode}'
+                SET CorporationName = '{corporation.CorporationName}', Currency = '{corporation.CurrencyCode.ToString()}'
                 WHERE ID = {corporation.ID};
                 UPDATE Addresse
                 SET Country = '{corporation.Country}', City = '{corporation.CityName}', ZipCode = '{corporation.Zipcode}', BuildingNumber = '{corporation.BuildingNumber}', Road = '{corporation.RoadName}', LocationName = '{corporation.LocationName}'
