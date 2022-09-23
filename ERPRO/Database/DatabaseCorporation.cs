@@ -62,9 +62,7 @@ namespace ERPRO.DatabaseNS
                     corp.RoadName = addressReader.GetString(5);
                     addressReader.Close();
                 }
-            
             };
-
             return corporations;
         }
 

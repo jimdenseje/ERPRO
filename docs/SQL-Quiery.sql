@@ -17,8 +17,10 @@ CREATE TABLE Person (
     AddresseID INT FOREIGN KEY REFERENCES Addresse(ID)
 );
 
+--DROP TABLE Customer
 CREATE TABLE Customer (
     ID INT FOREIGN KEY REFERENCES Person(ID),
+    CustomerNumber INT IDENTITY (1,1) NOT NULL,
     LastPurchase DATETIME NOT NULL,
 );
 
@@ -70,8 +72,8 @@ CREATE TABLE SalesOrderLineProduct (
     -- )
 );
 
+
 CREATE TABLE SaleOrderLine (
     SaleOrder INT FOREIGN KEY REFERENCES SaleOrder(OrderNumber),
-    ProductItemID INT FOREIGN KEY REFERENCES Product(ID),
     SalesOrderLineProductID INT FOREIGN KEY REFERENCES SalesOrderLineProduct(ID)
 );

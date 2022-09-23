@@ -1,4 +1,4 @@
---The following adds the addresse data to the DB
+            --The following adds the addresse data to the DB
 
 -- INSERT INTO Addresse (Country, City, ZipCode, BuildingNumber, Road, LocationName)
 -- VALUES ('', '', '', '', '', 'No Storage');
@@ -18,6 +18,13 @@
 -- INSERT INTO Addresse (Country, City, ZipCode, BuildingNumber, Road, LocationName)
 -- VALUES ('Tyskland', 'Gesellschaftdurch', '3004', 'A56', 'Geselssweg', 'Gesellschaft');
 
+                --Addresses used for persons:
+-- INSERT INTO Addresse (Country, City, ZipCode, BuildingNumber, Road, LocationName)
+-- VALUES ('Denmark', 'Haderslev', '6100', '32', 'Damsvej', 'Person Adresse');
+
+-- INSERT INTO Addresse (Country, City, ZipCode, BuildingNumber, Road, LocationName)
+-- VALUES ('Denmark', 'Sønderborg', '4600', '15', 'Ahornvej', 'Person Adresse');
+
 -- FOR TESTING PURPOSES::
 -- SELECT * FROM Addresse
 
@@ -25,7 +32,7 @@
 
 
 
---The following adds the corporation data to the DB
+            --The following adds the corporation data to the DB
 
 -- INSERT INTO Corporation (CorporationName, Currency, AddresseID)
 -- VALUES ('Fisketorvet', 'DKK', '5');
@@ -38,6 +45,97 @@
 
 -- SELECT * FROM Corporation
 
-UPDATE Corporation
-SET CorporationName = 'Fisketorvet', Currency = 'DKK'
-WHERE ID = 1;
+
+
+
+            --The following adds persons to the db
+-- INSERT INTO Person (FirstName, LastName, PhoneNumber, Email, AddresseID)
+-- VALUES ('Jim', 'Damgaard', '+4550533174', 'jimdenseje@gmail.com', '7');
+
+-- INSERT INTO Person (FirstName, LastName, PhoneNumber, Email, AddresseID)
+-- VALUES ('Jonas', 'Luuk', '+456456443', 'jfd@gmail.com', '8');
+
+
+            --Binding the two persons to customers
+-- INSERT INTO Customer (ID, LastPurchase)
+-- VALUES ('1', '20220820 10:34:09 AM');
+
+-- INSERT INTO Customer (ID, LastPurchase)
+-- VALUES ('1', '20220823 10:34:09 AM');
+
+-- SELECT * FROM Customer
+
+
+
+
+
+            --The following adds products to the DB
+            --Storage ID 1 is nothing - 2 is Aarhus - 3 is Odense - 4 is Tønder
+
+-- INSERT INTO Product (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('1', 'Bold', 'En rund hvid bold', '59.99', '39.99', '2', '100', 'Indefinite');
+
+-- INSERT INTO Product (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('2', 'Basketbold', 'En rund orange og sort bold', '69.99', '42.99', '2', '100', 'Indefinite');
+
+-- INSERT INTO Product (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('3', 'Bacon', 'Sprødt svin', '19.99', '2', '3', '40', 'Indefinite');
+
+-- INSERT INTO Product (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('4', 'Kage', 'Kanelkage med kaffecreme', '24.99', '8', '3', '35', 'Indefinite');
+
+-- INSERT INTO Product (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('5', 'Æble', 'Røde Pink Lady', '59.99', '38', '3', '78', 'Indefinite');
+
+-- INSERT INTO Product (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('6', 'Maleri', 'Ægte fake picasso', '599.99', '5', '1', '25', 'Indefinite');
+
+-- SELECT * FROM Product
+
+
+
+            --The following adds Saleorderstatus
+
+-- Creating the available statuses
+-- INSERT INTO SaleOrderStatus (ID, name)
+-- VALUES ('1', 'None');
+-- INSERT INTO SaleOrderStatus (ID, name)
+-- VALUES ('2', 'Created');
+-- INSERT INTO SaleOrderStatus (ID, name)
+-- VALUES ('3', 'Confirmed');
+-- INSERT INTO SaleOrderStatus (ID, name)
+-- VALUES ('4', 'Packed');
+
+
+
+            --The following adds saleorder, saleorderlineproduct and saleorderline
+--Creating the order with timestamps
+-- INSERT INTO SaleOrder (PersonID, Status, TimeOfCreation, TimeOfAcceptance)
+-- VALUES ('1', '2', GETDATE(), GETDATE());
+
+-- INSERT INTO SaleOrder (PersonID, Status, TimeOfCreation, TimeOfAcceptance)
+-- VALUES ('2', '3', GETDATE(), GETDATE());
+
+
+
+            --The following creates 3 lineproducts and 3 orderlines, adding them to the saleorders
+-- INSERT INTO SalesOrderLineProduct (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('1', 'Bacon', 'Sprødt svin', '19.99', '2', '3', '4', 'Indefinite')
+
+-- INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
+-- VALUES ('5', '1');
+
+-- INSERT INTO SalesOrderLineProduct (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('2', 'Æble', 'Røde Pink Lady', '59.99', '38', '3', '4', 'Indefinite');
+
+-- INSERT INTO SalesOrderLineProduct (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('3', 'Maleri', 'Ægte fake picasso', '599.99', '5', '1', '2', 'Indefinite');
+
+-- INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
+-- VALUES ('6', '2');
+
+-- INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
+-- VALUES ('6', '3');
+
+-- SELECT * FROM SaleOrderLine
+-- SELECT * FROM SalesOrderLineProduct
