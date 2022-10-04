@@ -8,8 +8,6 @@ using ERPRO.SalesNS;
 using ERPRO.AddressNS;
 using GrapeCity.Documents.Imaging;
 using ERPRO.Functions.Print;
-using System.Linq.Expressions;
-using System.Security.Cryptography;
 
 //Corporation database instances::
 Database.Instance.InsertCorporation(new Corporation {
@@ -194,28 +192,6 @@ mySaleOrder = new SalesOrder
 mySaleOrder.AddSalesOrderLine(Database.Instance.GetProductFromID(2), 1);
 mySaleOrder.AddSalesOrderLine(Database.Instance.GetProductFromID(3), 10);
 Database.Instance.InsertSaleOrder(mySaleOrder);
-
-/* Debug data For Address
-Address testaddress = new Address();
-testaddress.BuildingNumber = "A45";
-
-Produckt testproduckt = new Produckt(); 
-testproduckt.ItemID = 1;
-testproduckt.Name = "testproduckt";
-testproduckt.Location = testaddress;*/
-
-string intro = @" .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
-| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
-| |  _________   | || |  _______     | || |   ______     | || |  _______     | || |     ____     | |
-| | |_   ___  |  | || | |_   __ \    | || |  |_   __ \   | || | |_   __ \    | || |   .'    `.   | |
-| |   | |_  \_|  | || |   | |__) |   | || |    | |__) |  | || |   | |__) |   | || |  /  .--.  \  | |
-| |   |  _|  _   | || |   |  __ /    | || |    |  ___/   | || |   |  __ /    | || |  | |    | |  | |
-| |  _| |___/ |  | || |  _| |  \ \_  | || |   _| |_      | || |  _| |  \ \_  | || |  \  `--'  /  | |
-| | |_________|  | || | |____| |___| | || |  |_____|     | || | |____| |___| | || |   `.____.'   | |
-| |              | || |              | || |              | || |              | || |              | |
-| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
- '----------------'  '----------------'  '----------------'  '----------------'  '----------------' 
-  - Made by GRP4 - Jim, Marcus & Tobias";
 
 int[,] car =
 {
