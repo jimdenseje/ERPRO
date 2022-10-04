@@ -72,23 +72,23 @@
             --The following adds products to the DB
             --Storage ID 1 is nothing - 2 is Aarhus - 3 is Odense - 4 is Tønder
 
-INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
-VALUES ('Bold', 'En rund hvid bold', '59.99', '39.99', '2', '100', 'Indefinite');
+-- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('Bold', 'En rund hvid bold', '59.99', '39.99', '2', '100', 'Indefinite');
 
-INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
-VALUES ('Basketbold', 'En rund orange og sort bold', '69.99', '42.99', '2', '100', 'Indefinite');
+-- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('Basketbold', 'En rund orange og sort bold', '69.99', '42.99', '2', '100', 'Indefinite');
 
-INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
-VALUES ('Bacon', 'Sprødt svin', '19.99', '2', '3', '40', 'Indefinite');
+-- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('Bacon', 'Sprødt svin', '19.99', '2', '3', '40', 'Indefinite');
 
-INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
-VALUES ('Kage', 'Kanelkage med kaffecreme', '24.99', '8', '3', '35', 'Indefinite');
+-- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('Kage', 'Kanelkage med kaffecreme', '24.99', '8', '3', '35', 'Indefinite');
 
-INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
-VALUES ('Æble', 'Røde Pink Lady', '59.99', '38', '3', '78', 'Indefinite');
+-- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('Æble', 'Røde Pink Lady', '59.99', '38', '3', '78', 'Indefinite');
 
-INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
-VALUES ('Maleri', 'Ægte fake picasso', '599.99', '5', '1', '25', 'Indefinite');
+-- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+-- VALUES ('Maleri', 'Ægte fake picasso', '599.99', '5', '1', '25', 'Indefinite');
 
 -- SELECT * FROM Product
 
