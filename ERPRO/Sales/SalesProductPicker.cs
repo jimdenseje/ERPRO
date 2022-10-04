@@ -6,6 +6,7 @@ using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
 using ERPRO.CustomerNS;
 using ERPRO.ProductNS;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.SalesNS
 {
@@ -13,47 +14,42 @@ namespace ERPRO.SalesNS
     {
         ListPage<Product> listPage;
 
-        public int ProductPicker { get; set; }
-
-        public override string Title { get; set; } = "Customers";
+        public List<SalesOrderLine> ProductPicker { get; set; } = new List<SalesOrderLine>();
+        public override string Title { get; set; } = "ProductList";
 
         protected override void Draw()
         {   
             do {
                 Clear(this);
-
-                Console.WriteLine();
-                Console.WriteLine("Press F1 to add a new Customer");
-                Console.WriteLine();
-
-                Product product;
-                Form<Product> listpage = new Form<Product>();
-                listpage.SelectBox("Status", "status");
-                listpage.AddOption("Status", "None", nameof(SalesOrder.Status.None));
-                listpage.AddOption("Status", "Created", nameof(SalesOrder.Status.Created));
-                listpage.AddOption("Status", "Confirmed", nameof(SalesOrder.Status.Confirmed));
-                listpage.AddOption("Status", "Packed", nameof(SalesOrder.Status.Packed));
-                //listPage.AddColumn("Last Purchase", nameof(customer.LastPurchase), 25);
+                listPage = new ListPage<Product>();
                 var products = Database.Instance.GetAllProducts();
                 listPage.Add(products);
-                product = listPage.Select();
-                if (product != null) {
-                    ProductPicker = product.ItemID;
+                listPage.AddColumn("Product Name", nameof(Product.Name), 15);
+                listPage.AddColumn("In storage", nameof(Product.Quantity), 12);
+                listPage.AddColumn("Purchase price", nameof(Product.PurchasePrice), 15);
+                listPage.AddColumn("Selling price", nameof(Product.SellingPrice), 15);
+                listPage.AddColumn("Return in percent", nameof(Product.ProfitInPercentage), 18);
+                var product = listPage.Select();
+                if (product != null)
+                {
+                    decimal qty = SalesProductQty.get(product.Name, product.Quantity);
+                    if (qty > 0)
+                    {
+                        Product ChosenProduct = Database.Instance.GetProductFromID(product.ItemID);
+                        ChosenProduct.Quantity -= qty;
+                        Database.Instance.UpdateProduct(ChosenProduct, product.ItemID);
+                        var NewOrder = new SalesOrderLine(ChosenProduct);
+                        NewOrder.SaleQty = qty;
+                        ProductPicker.Add(NewOrder);
+                    }
+                    Clear(this);
+                }
+                else
+                {
+                    Clear(this);
                     Quit();
-                } else {
-                    Quit();
-                    return;
                 }
             } while (Show);
-        }
-        void addProduct(Product _) {
-            Product newProduct = new Product();
-            ProductEdit editor = new ProductEdit(newProduct);
-            Display(editor);
-            if(newCustomer.FirstName != null) {
-                Database.Instance.InsertCustomer(newCustomer);
-                listPage.Add(newCustomer);
-            }
         }
     }
 }

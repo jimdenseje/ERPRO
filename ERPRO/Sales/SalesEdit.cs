@@ -14,12 +14,12 @@ namespace ERPRO.SalesNS
     {
         public override string Title { get; set; } = "Add SalesOrder";
         private SalesOrder salesOrder { get; set; }
+        public List<SalesOrderLine> OrderLines { get; set; }
         private Product product { get; set; }
-
 
         public SalesEdit(SalesOrder salesOrder)
         {
-            this.salesOrder = salesOrder; 
+            this.salesOrder = salesOrder;
         }
         protected override void Draw()
         {

@@ -26,7 +26,7 @@ namespace ERPRO.PersonNS
         }
 
         protected Person () {
-            Addresse = new Address();
+            Address = new Address();
         }
     }
 

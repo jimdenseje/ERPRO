@@ -7,6 +7,7 @@ using ERPRO.Functions.Print;
 using ERPRO.DatabaseNS;
 using ERPRO.ProductNS;
 using TECHCOOL.UI;
+using System.Xml.Linq;
 
 namespace ERPRO.SalesNS
 {
@@ -22,19 +23,14 @@ namespace ERPRO.SalesNS
                 Clear(this);
 
                 Console.WriteLine();
-                Console.WriteLine("Press F1 to add an item");
-                Console.WriteLine("Press F2 to edit an item");
-                Console.WriteLine("Press F5 to delete an item");
+                Console.WriteLine($"Press F1 to add a item");
+                Console.WriteLine($"Press F5 to delete a item");
                 Console.WriteLine();
-
-                //Console.CursorVisible = false;
-                keyheader.KeyHeader("salesorder");
-
 
                 listPage = new ListPage<SalesOrder>();
                 listPage.AddKey(ConsoleKey.F1, addSalesOrder);
-                listPage.AddKey(ConsoleKey.F2, editSalesOrder);
                 listPage.AddKey(ConsoleKey.F5, deleteSalesOrder);
+                listPage.AddColumn("Order ID", nameof(SalesOrder.OrderID), 9);
                 listPage.AddColumn("Customer ID", nameof(SalesOrder.CustomerID), 12);
                 listPage.AddColumn("Total Price", "TotalPrice", 12);
                 listPage.AddColumn("Time Of Creation", "TimeOfCreation", 22);
@@ -47,67 +43,65 @@ namespace ERPRO.SalesNS
                 {
                     var viewSalesOrderScreen = new SalesOrderLinesListPage(salesOrder);
                     Display(viewSalesOrderScreen);
-                    Clear(this); //FIX BY JIM
+                    Clear(this); 
                 }
                 else
                 {
-                    Clear(this); //FIX BY JIM
+                    Clear(this); 
                     Quit();
-                    //return; NOT NEEDED HERE JIM
+                    
                 }
 
             } while (Show);
         }
-        void addSalesOrder(SalesOrder _)
+        public void addSalesOrder(SalesOrder _)
         {
             Clear(this);
 
             SalesCustomerPicker chooseCustomer = new SalesCustomerPicker();
             Display(chooseCustomer);
 
+            if (chooseCustomer.lastpicker == 0)
+            {
+                Clear(this);
+                keyheader.KeyHeader("salesorder");
+                return;
+            }
 
             SalesProductPicker chooseProduct = new SalesProductPicker();
             Display(chooseProduct);
 
-            /*
-            Console.WriteLine("Edit Exesisten Customer");
-            Console.WriteLine("Edit New Customer");
-            string key = Console.ReadLine();
-            if (key == "1")
-            {
-
-            }
-            if (key == "2")
-            {
-
-            }
-            */
-
-
             SalesOrder newSalesOrder = new SalesOrder();
             newSalesOrder.CustomerID = chooseCustomer.lastpicker;
+            newSalesOrder.OrderLines = chooseProduct.ProductPicker;
+
+            if (newSalesOrder.OrderLines.Count == 0)
+            {
+                Clear(this);
+                keyheader.KeyHeader("salesorder");
+                return;
+            }
+
             SalesEdit editor = new SalesEdit(newSalesOrder);
             Display(editor);
 
-                if (newSalesOrder.FirstName != "")
-                {
-                    Database.Instance.InsertSaleOrder(newSalesOrder);
-                    listPage.Add(newSalesOrder);
-                }
-
-
-
-            SalesOrder newProduct = new SalesOrder();
-            newProduct.CustomerID = chooseProduct.ProductPicker;
-            SalesEdit salesEdit = new SalesEdit(newProduct);
-            Display(salesEdit);
-
-            if (newProduct.FirstName != "")
+            if (newSalesOrder.FirstName != "" && newSalesOrder.status != null)
             {
-                Database.Instance.InsertSaleOrder(newProduct);
-                listPage.Add(newProduct);
+                Database.Instance.InsertSaleOrder(newSalesOrder);
+                listPage.Add(newSalesOrder);
+            }
+            else
+            {
+                foreach (SalesOrderLine item in newSalesOrder.OrderLines)
+                {
+                    Product ChosenProduct = Database.Instance.GetProductFromID(item.Product.ItemID);
+                    ChosenProduct.Quantity += item.SaleQty;
+                    Database.Instance.UpdateProduct(ChosenProduct, item.Product.ItemID);
+                }
             }
 
+            Clear(this);
+            keyheader.KeyHeader("salesorder");
         }
 
         void editSalesOrder(SalesOrder salesOrder)
@@ -115,12 +109,26 @@ namespace ERPRO.SalesNS
             SalesEdit editor = new SalesEdit(salesOrder);
             Display(editor);
             Database.Instance.UpdateSaleOrder(salesOrder, salesOrder.OrderID);
+            Clear(this);
+            keyheader.KeyHeader("salesorder");
         }
 
         void deleteSalesOrder(SalesOrder salesOrder)
         {
+            if (salesOrder.status == "Created")
+            {
+                foreach (SalesOrderLine item in salesOrder.OrderLines)
+                {
+                    Product ChosenProduct = Database.Instance.GetProductFromID(item.Product.ItemID);
+                    ChosenProduct.Quantity += item.SaleQty;
+                    Database.Instance.UpdateProduct(ChosenProduct, item.Product.ItemID);
+                }
+            }
+
             Database.Instance.DeleteSaleOrder(salesOrder, salesOrder.OrderID);
             listPage.Remove(salesOrder);
+            Clear(this);
+            keyheader.KeyHeader("salesorder");
         }
     }
 }

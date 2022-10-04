@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
 using ERPRO.CustomerNS;
+using ERPRO.ProductNS;
+using ERPRO.Functions.Print;
 
 namespace ERPRO.SalesNS
 {
@@ -29,7 +31,7 @@ namespace ERPRO.SalesNS
                 listPage = new ListPage<Customer>();
                 listPage.AddKey(ConsoleKey.F1, addCustomer);
                 listPage.AddColumn("Full Name", nameof(customer.FullName), 20);
-                listPage.AddColumn("Address", nameof(customer.Address), 25);
+                listPage.AddColumn("Address", nameof(customer.FullAddress), 40);
                 //listPage.AddColumn("Last Purchase", nameof(customer.LastPurchase), 25);
                 var customers = Database.Instance.GetCustomer();
                 listPage.Add(customers);
@@ -38,6 +40,8 @@ namespace ERPRO.SalesNS
                     lastpicker = customer.ID;
                     Quit();
                 } else {
+                    Clear(this);
+                    keyheader.KeyHeader("salesorder");
                     Quit();
                     return;
                 }
