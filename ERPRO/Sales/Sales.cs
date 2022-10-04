@@ -4,23 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.ProductNS;
 using ERPRO.Functions.Objects;
+using ERPRO.PersonNS;
+
 namespace ERPRO.SalesNS
 {
-    public enum Status {
-        None,
-        Created,
-        Confirmed,
-        Packed
-    }
 
-    public class SalesOrder
+
+    public class SalesOrder : Person
     {
+        public enum Status {
+            None,
+            Created,
+            Confirmed,
+            Packed
+        }
+
+        public Person person { get; set; }
         public int OrderID { get; set; }
         public DateTime TimeOfCreation { get; set; }
         public DateTime TimeOfAcceptance { get; set; }
         public int CustomerID { get; set; }
-        public Status Status { get; set; }
-        public List<SalesOrderLine> OrderLines { get; } = new List<SalesOrderLine>();
+        public string status { get; set; }
+        public List<SalesOrderLine> OrderLines { get; set; } = new List<SalesOrderLine>();
 
         public decimal TotalPrice { get => GetTotalPrice(); }
         private decimal GetTotalPrice() {
@@ -37,6 +42,10 @@ namespace ERPRO.SalesNS
 
             OrderLines.Add(newSalesOrderLine);
         }
+        public void DeleteSalesOrderLine(SalesOrderLine salesorderline)
+        {
+            OrderLines.Remove(salesorderline);
+        }
 
     }
 
@@ -44,11 +53,20 @@ namespace ERPRO.SalesNS
     public class SalesOrderLine 
     {
        public SalesOrderLine(Product product) {
-           this.Product = product;
-       }
-       public Product Product { get; set; }
-       public decimal SellingPrice { get => Product.SellingPrice; set => Product.SellingPrice = value; }
+            this.Product = new Product(product.Location.ID);
+            PropMapper<Product, Product>.CopyTo(product, this.Product);
+        }
+        public Product Product { get; set; }
+
+        public string Name { get => Product.Name; set => Product.Name = value; }
+        public decimal SellingPrice { get => Product.SellingPrice; set => Product.SellingPrice = value; }
        public decimal SaleQty { get; set; }
+        public decimal TotalPrice { get => GetTotalPricePrItem(); }
+        private decimal GetTotalPricePrItem()
+        {
+            decimal totalprice = SellingPrice * SaleQty;
+            return totalprice;
+        }
     }
 
     //TODO REFRACTOR EVERYTING NO LISTS IN ANY CLASS DOSN'T WORK WITH FRAMEWORK :( ADD SalesOrderLine TO DB (GET SET)
@@ -82,4 +100,4 @@ namespace ERPRO.SalesNS
     //     */
     // }
 
-}
+} 

@@ -60,7 +60,7 @@ namespace ERPRO.CorporationNS
         }
 
          void deleteCorporation(Corporation corporation) {
-            Database.Instance.DeleteCorporation(corporation);
+            Database.Instance.DeleteCorporation(corporation, 1);
             listPage.Remove(corporation);
             Clear(this);
             keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view

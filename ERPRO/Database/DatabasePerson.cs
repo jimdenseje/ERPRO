@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.CustomerNS;
+using ERPRO.PersonNS;
 
 namespace ERPRO.DatabaseNS
 {

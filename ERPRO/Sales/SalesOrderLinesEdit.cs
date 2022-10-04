@@ -10,7 +10,7 @@ namespace ERPRO.SalesNS
 {
     public class SalesOrderLinesEdit : Screen
     {
-        public override string Title { get; set; } = "Edit Corporation";
+        public override string Title { get; set; } = "Edit Sales module";
         private SalesOrderLine salesOrderLine { get; set; }
         public SalesOrderLinesEdit(SalesOrderLine salesOrderLine)
         {
