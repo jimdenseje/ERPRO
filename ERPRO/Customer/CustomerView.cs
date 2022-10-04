@@ -23,7 +23,7 @@ namespace ERPRO.CustomerNS
                     {"ID", customer.ID.ToString()},
                     {"Name", customer.FirstName + " " + customer.LastName},
                     {"Email", customer.Email},
-                    {"Address",customer.Address.FullAddress},
+                    {"Address",customer.FullAddress},
                     {"Phone Number", customer.PhoneNumber},
                     {"CustomerNumber", customer.CustomerNumber.ToString()},
             });

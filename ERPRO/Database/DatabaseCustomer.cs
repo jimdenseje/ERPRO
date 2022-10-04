@@ -17,6 +17,11 @@ namespace ERPRO.DatabaseNS
 
         public Customer GetCustomer(int id) {
             Customer customer = new Customer();
+            if(id == 0){
+                customer.ID = 0;
+                customer.CustomerNumber = 0;
+                customer.LastPurchase = DateTime.Now;
+            } else {
             using (var connection = getConnection()){
                 var command = connection.CreateCommand();
                 command.CommandText = "SELECT * FROM Customer WHERE ID=" + id;
@@ -25,6 +30,7 @@ namespace ERPRO.DatabaseNS
                 customer.ID = reader.GetInt32(0);
                 customer.CustomerNumber = reader.GetInt32(1);
                 customer.LastPurchase = reader.GetDateTime(2);
+                }
             };
             return customer;
         }

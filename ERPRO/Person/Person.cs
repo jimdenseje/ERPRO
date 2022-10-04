@@ -23,7 +23,7 @@ namespace ERPRO.CustomerNS
             return FirstName + " " + LastName;
         }
 
-        protected Person () {
+        public Person () {
             Addresse = new Address();
         }
     }

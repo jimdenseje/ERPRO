@@ -25,10 +25,10 @@ namespace ERPRO.DatabaseNS
                 product.ItemID = reader.GetInt32(0);
                 product.Name = reader.GetString(1);
                 product.Description = reader.GetString(2);
-                product.SellingPrice = reader.GetInt32(3);
-                product.PurchasePrice = reader.GetInt32(4);
+                product.SellingPrice = reader.GetDecimal(3);
+                product.PurchasePrice = reader.GetDecimal(4);
                 product.LocationID = reader.GetInt32(5);
-                product.Quantity = reader.GetInt32(6);
+                product.Quantity = reader.GetDecimal(6);
                 product.Unit = reader.GetString(7);
             };
             return product;
@@ -80,7 +80,7 @@ namespace ERPRO.DatabaseNS
                 } else {
                     command.CommandText =
                     @$"UPDATE Product
-                    SET ItemName = '{product.Name}', ItemDescription = '{product.Description}', SellingPrice = '{product.SellingPrice}', PurchasePrice = '{product.PurchasePrice}', StorageID = '{product.LocationID}', QTY = '{product.Quantity}', UNIT = '{product.Unit}',
+                    SET ItemName = '{product.Name}', ItemDescription = '{product.Description}', SellingPrice = '{product.SellingPrice}', PurchasePrice = '{product.PurchasePrice}', StorageID = '{product.LocationID}', QTY = '{product.Quantity}', UNIT = '{product.Unit}'
                     WHERE ID = {product.ItemID};
                     ";
                     command.ExecuteNonQuery();

@@ -28,6 +28,9 @@
 -- FOR TESTING PURPOSES::
 -- SELECT * FROM Addresse
 
+SELECT * FROM Customer
+
+SELECT * FROM Person WHERE ID = 1
 
 
 

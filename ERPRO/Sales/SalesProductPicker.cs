@@ -37,7 +37,7 @@ namespace ERPRO.SalesNS
                     {
                         Product ChosenProduct = Database.Instance.GetProductFromID(product.ItemID);
                         ChosenProduct.Quantity -= qty;
-                        Database.Instance.UpdateProduct(ChosenProduct, product.ItemID);
+                        Database.Instance.UpdateProduct(ChosenProduct);
                         var NewOrder = new SalesOrderLine(ChosenProduct);
                         NewOrder.SaleQty = qty;
                         ProductPicker.Add(NewOrder);

@@ -6,7 +6,6 @@ using ERPRO.DatabaseNS;
 using TECHCOOL.UI;
 using ERPRO.CustomerNS;
 using ERPRO.ProductNS;
-using ERPRO.PersonNS;
 
 namespace ERPRO.SalesNS
 {
@@ -19,9 +18,7 @@ namespace ERPRO.SalesNS
 
             Console.Clear();
             Console.WriteLine($"Your Choosen Product is: {Productname}");
-
             Console.Write("Choose Qty Of Products: ");
-
 
             decimal qty =0;
             bool Accepted = false;

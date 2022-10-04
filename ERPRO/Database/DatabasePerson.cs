@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.CustomerNS;
-using ERPRO.PersonNS;
-
 namespace ERPRO.DatabaseNS
 {
     internal partial class Database
@@ -12,16 +10,33 @@ namespace ERPRO.DatabaseNS
         public static List<Person> PersonList { get; } = new List<Person>();
 
         public Person GetPerson(int id) {
-            Person result = null;
-            foreach (var Person in PersonList)
-            {
-                if (id == Person.ID) {
-                    result = Person;
-                    break;
+            Person person = new Person();
+            if(id == 0){
+                person.ID = 0;
+                person.AddresseID = 0;
+                person.FirstName = null;
+                person.LastName = null;
+                person.PhoneNumber = null;
+                person.Email = null;
+            } else {
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM Person WHERE ID=" + id;
+                var reader = command.ExecuteReader();
+                reader.Read();
+
+                person.ID = reader.GetInt32(0);
+                person.FirstName = reader.GetString(1);
+                person.LastName = reader.GetString(2);
+                person.PhoneNumber = reader.GetString(3);
+                person.Email = reader.GetString(4);
+                person.AddresseID = reader.GetInt32(5);
                 }
-            }
-            return result;
+            };
+            return person;
         }
+
+        
 
         public List<Person> GetPerson() {
             List<Person> Persons = new List<Person>();

@@ -126,7 +126,7 @@ namespace ERPRO.SalesNS
 
             Product ChosenProduct = Database.Instance.GetProductFromID(salesOrderLine.Product.ItemID);
             ChosenProduct.Quantity += oldqty;
-            Database.Instance.UpdateProduct(ChosenProduct, salesOrderLine.Product.ItemID);
+            Database.Instance.UpdateProduct(ChosenProduct);
 
             decimal qty = SalesProductQty.get(salesOrderLine.Product.Name, ChosenProduct.Quantity);
             
@@ -134,7 +134,7 @@ namespace ERPRO.SalesNS
 
             ChosenProduct = Database.Instance.GetProductFromID(salesOrderLine.Product.ItemID);
             ChosenProduct.Quantity -= qty;
-            Database.Instance.UpdateProduct(ChosenProduct, salesOrderLine.Product.ItemID);
+            Database.Instance.UpdateProduct(ChosenProduct);
 
             listPage.Add(salesOrderLine);
 
@@ -157,7 +157,7 @@ namespace ERPRO.SalesNS
 
             Product ChosenProduct = Database.Instance.GetProductFromID(salesOrderLine.Product.ItemID);
             ChosenProduct.Quantity += salesOrderLine.SaleQty;
-            Database.Instance.UpdateProduct(ChosenProduct, salesOrderLine.Product.ItemID);
+            Database.Instance.UpdateProduct(ChosenProduct);
 
             salesOrder.DeleteSalesOrderLine(salesOrderLine);
             listPage.Remove(salesOrderLine);

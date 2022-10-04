@@ -23,8 +23,8 @@ namespace ERPRO.SalesNS
                 Clear(this);
 
                 Console.WriteLine();
-                Console.WriteLine($"Press F1 to add a item");
-                Console.WriteLine($"Press F5 to delete a item");
+                Console.WriteLine($"Press F1 to add a Sales Order");
+                Console.WriteLine($"Press F5 to delete a Sales Order");
                 Console.WriteLine();
 
                 listPage = new ListPage<SalesOrder>();
@@ -37,8 +37,15 @@ namespace ERPRO.SalesNS
                 listPage.AddColumn("Time Of Acceptance", "TimeOfAcceptance", 22);
                 listPage.AddColumn("Status", "status", 12);
                 var salesOrders = Database.Instance.GetSalesOrder();
+                if(salesOrders.Count == 0) {
+                    salesOrders.Add(new SalesOrder());
+                }
                 listPage.Add(salesOrders);
-                var salesOrder = listPage.Select();
+                SalesOrder salesOrder = null;
+                try{salesOrder = listPage.Select();}
+                catch(ArgumentOutOfRangeException){
+                    salesOrder = new SalesOrder();
+                }
                 if (salesOrder != null)
                 {
                     var viewSalesOrderScreen = new SalesOrderLinesListPage(salesOrder);
@@ -56,6 +63,7 @@ namespace ERPRO.SalesNS
         }
         public void addSalesOrder(SalesOrder _)
         {
+            Person person = new Person();
             Clear(this);
 
             SalesCustomerPicker chooseCustomer = new SalesCustomerPicker();
@@ -68,35 +76,38 @@ namespace ERPRO.SalesNS
                 return;
             }
 
+            // person = Database.Instance.GetPerson(chooseCustomer.lastpicker);
+            _.person = Database.Instance.GetPerson(chooseCustomer.lastpicker);
+            _.person.Addresse = Database.Instance.GetAddress(_.person.AddresseID);
+
             SalesProductPicker chooseProduct = new SalesProductPicker();
             Display(chooseProduct);
 
-            SalesOrder newSalesOrder = new SalesOrder();
-            newSalesOrder.CustomerID = chooseCustomer.lastpicker;
-            newSalesOrder.OrderLines = chooseProduct.ProductPicker;
+            _.CustomerID = chooseCustomer.lastpicker;
+            _.OrderLines = chooseProduct.ProductPicker;
 
-            if (newSalesOrder.OrderLines.Count == 0)
+            if (_.OrderLines.Count == 0)
             {
                 Clear(this);
                 keyheader.KeyHeader("salesorder");
                 return;
             }
 
-            SalesEdit editor = new SalesEdit(newSalesOrder);
+            SalesEdit editor = new SalesEdit(_);
             Display(editor);
 
-            if (newSalesOrder.FirstName != "" && newSalesOrder.status != null)
+            if (_.person.FirstName != "" && _.status != null)
             {
-                Database.Instance.InsertSaleOrder(newSalesOrder);
-                listPage.Add(newSalesOrder);
+                Database.Instance.InsertSaleOrder(_);
+                listPage.Add(_);
             }
             else
             {
-                foreach (SalesOrderLine item in newSalesOrder.OrderLines)
+                foreach (SalesOrderLine item in _.OrderLines)
                 {
                     Product ChosenProduct = Database.Instance.GetProductFromID(item.Product.ItemID);
                     ChosenProduct.Quantity += item.SaleQty;
-                    Database.Instance.UpdateProduct(ChosenProduct, item.Product.ItemID);
+                    Database.Instance.UpdateProduct(ChosenProduct);
                 }
             }
 
@@ -121,7 +132,7 @@ namespace ERPRO.SalesNS
                 {
                     Product ChosenProduct = Database.Instance.GetProductFromID(item.Product.ItemID);
                     ChosenProduct.Quantity += item.SaleQty;
-                    Database.Instance.UpdateProduct(ChosenProduct, item.Product.ItemID);
+                    Database.Instance.UpdateProduct(ChosenProduct);
                 }
             }
 

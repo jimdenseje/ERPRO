@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPRO.ProductNS;
 using ERPRO.Functions.Objects;
-using ERPRO.PersonNS;
+using ERPRO.CustomerNS;
 
 namespace ERPRO.SalesNS
 {
 
 
-    public class SalesOrder : Person
+    public class SalesOrder
     {
         public enum Status {
             None,
@@ -25,6 +25,17 @@ namespace ERPRO.SalesNS
         public DateTime TimeOfAcceptance { get; set; }
         public int CustomerID { get; set; }
         public string status { get; set; }
+
+        //Simons rod
+        public string Road { get => person.Addresse.Road; set => person.Addresse.Road = value; }
+        public string BuildingNumber { get => person.Addresse.BuildingNumber; set => person.Addresse.BuildingNumber = value; }
+        public string ZipCode { get => person.Addresse.ZipCode; set => person.Addresse.ZipCode = value; }
+        public string City { get => person.Addresse.City; set => person.Addresse.City = value; }
+        public string Country { get => person.Addresse.Country; set => person.Addresse.Country = value; }
+        public string LocationName { get => person.Addresse.LocationName; set => person.Addresse.LocationName = value; }
+        public string Email { get => person.Email; set => person.Email = value; }
+        public string PhoneNumber { get => person.PhoneNumber; set => person.PhoneNumber = value; }
+
         public List<SalesOrderLine> OrderLines { get; set; } = new List<SalesOrderLine>();
 
         public decimal TotalPrice { get => GetTotalPrice(); }
@@ -53,7 +64,7 @@ namespace ERPRO.SalesNS
     public class SalesOrderLine 
     {
        public SalesOrderLine(Product product) {
-            this.Product = new Product(product.Location.ID);
+            this.Product = new Product();
             PropMapper<Product, Product>.CopyTo(product, this.Product);
         }
         public Product Product { get; set; }

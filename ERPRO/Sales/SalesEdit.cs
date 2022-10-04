@@ -6,7 +6,6 @@ using TECHCOOL.UI;
 using ERPRO.DatabaseNS;
 using ERPRO.CustomerNS;
 using ERPRO.ProductNS;
-using ERPRO.PersonNS;
 
 namespace ERPRO.SalesNS
 {
@@ -14,6 +13,9 @@ namespace ERPRO.SalesNS
     {
         public override string Title { get; set; } = "Add SalesOrder";
         private SalesOrder salesOrder { get; set; }
+        
+        //Skal have fat i en specific person
+        private Person person { get; set; }
         public List<SalesOrderLine> OrderLines { get; set; }
         private Product product { get; set; }
 
@@ -30,12 +32,19 @@ namespace ERPRO.SalesNS
             edit.TextBox("Time Of Acceptance", "TimeOfAcceptance");*/
             //edit.TextBox("Customer ID", "CustomerID");
 
-            edit.TextBox("Road", nameof(Person.Address.Road));
-            edit.TextBox("BuildingNumber", nameof(Person.Address.BuildingNumber));
-            edit.TextBox("Zip Code", nameof(Person.Address.ZipCode));
-            edit.TextBox("City", nameof(Person.Address.City));
-            edit.TextBox("Email", nameof(Person.Email));
-            edit.TextBox("PhoneNumber", nameof(Person.PhoneNumber));
+            edit.TextBox("Road", nameof(salesOrder.person.Addresse.Road));
+            edit.TextBox("BuildingNumber", nameof(salesOrder.person.Addresse.BuildingNumber));
+            edit.TextBox("Zip Code", nameof(salesOrder.person.Addresse.ZipCode));
+            edit.TextBox("City", nameof(salesOrder.person.Addresse.City));
+            edit.TextBox("Email", nameof(salesOrder.person.Email));
+            edit.TextBox("PhoneNumber", nameof(salesOrder.person.PhoneNumber));
+
+            // edit.TextBox("Road", "status");
+            // edit.TextBox("BuildingNumber", "status");
+            // edit.TextBox("Zip Code", "status");
+            // edit.TextBox("City", "status");
+            // edit.TextBox("Email", "status");
+            // edit.TextBox("PhoneNumber", "status");
 
             edit.SelectBox("Status", "status");
             edit.AddOption("Status", "None", nameof(SalesOrder.Status.None));
