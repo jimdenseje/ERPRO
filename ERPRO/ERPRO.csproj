@@ -9,6 +9,7 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="GrapeCity.Documents.Imaging" Version="5.2.0.801" />
     <PackageReference Include="TECHCOOL" Version="1.3.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
