@@ -32,6 +32,7 @@ namespace ERPRO.CorporationNS
             edit.AddOption("Currency code", "EUR", CurrencyCode.EUR);
             edit.Edit(corporation);
             Quit();
+            Database.Instance.UpdateCorporation(corporation);
             Clear(this);
         }
     }

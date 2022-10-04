@@ -8,6 +8,8 @@ CREATE TABLE Addresse (
     LocationName VARCHAR(60) NOT NULL
 );
 
+SELECT * FROM Addresse WHERE ID=2
+
 CREATE TABLE Person (
     ID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
     FirstName VARCHAR(max) NOT NULL,
@@ -17,12 +19,25 @@ CREATE TABLE Person (
     AddresseID INT FOREIGN KEY REFERENCES Addresse(ID)
 );
 
---DROP TABLE Customer
+SELECT * FROM Person WHERE ID=1
+
+DROP TABLE Customer
 CREATE TABLE Customer (
     ID INT FOREIGN KEY REFERENCES Person(ID),
     CustomerNumber INT IDENTITY (1,1) NOT NULL,
     LastPurchase DATETIME NOT NULL,
 );
+ALTER TABLE Customer
+ALTER COLUMN LastPurchase DATETIME NULL
+
+INSERT INTO Customer (ID)
+VALUES (3)
+
+SELECT * FROM Addresse
+
+SELECT * FROM Person
+
+SELECT * FROM Customer
 
 CREATE TABLE Corporation (
     ID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
@@ -36,18 +51,18 @@ CREATE TABLE SaleOrderStatus (
     name VARCHAR(12) NOT NULL,
 );
 
+SELECT * FROM Product
+DROP TABLE Product
+
 CREATE TABLE Product (
-    ID INT NOT NULL PRIMARY KEY,
+    ID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
     ItemName VARCHAR(max) NOT NULL,
-    ItemDescription VARCHAR(max) NOT NULL,
+    ItemDescription VARCHAR(max) NULL,
     SellingPrice DECIMAL NOT NULL,
     PurchasePrice DECIMAL NOT NULL,
     StorageID INT FOREIGN KEY REFERENCES Addresse(ID) NOT NULL,
     QTY DECIMAL NOT NULL,
     UNIT VARCHAR(max) NOT NULL,
-    -- CONSTRAINT UQ_Product UNIQUE NONCLUSTERED(
-    --     ItemName, StorageID
-    -- )
 );
 
 CREATE TABLE SaleOrder (

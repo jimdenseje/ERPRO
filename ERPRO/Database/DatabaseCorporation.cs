@@ -10,11 +10,9 @@ namespace ERPRO.DatabaseNS
     internal partial class Database
     {
         List<Corporation> list = new List<Corporation>();
-        static int nextId = 0;
 
         public void InsertCorporation(Corporation corporation) {
             list.Add(corporation);
-            corporation.ID = nextId++;
         }
 
         public Corporation GetCorporation(int id) {
@@ -22,7 +20,7 @@ namespace ERPRO.DatabaseNS
             using (var connection = getConnection())
             {
                 var command = connection.CreateCommand(); 
-                command.CommandText = "SELECT CorporationName FROM corporation WHERE ID=" + id;
+                command.CommandText = "SELECT * FROM corporation WHERE ID=" + id;
                 var reader = command.ExecuteReader();
                 reader.Read();
                 corporation.ID = reader.GetInt32(0);
@@ -69,21 +67,46 @@ namespace ERPRO.DatabaseNS
         public void UpdateCorporation(Corporation corporation) {
             using (var connection = getConnection()){
                 var command = connection.CreateCommand();
-                command.CommandText =
-                @$"UPDATE Corporation
-                SET CorporationName = '{corporation.CorporationName}', Currency = '{corporation.CurrencyCode.ToString()}'
-                WHERE ID = {corporation.ID};
-                UPDATE Addresse
-                SET Country = '{corporation.Country}', City = '{corporation.CityName}', ZipCode = '{corporation.Zipcode}', BuildingNumber = '{corporation.BuildingNumber}', Road = '{corporation.RoadName}', LocationName = '{corporation.LocationName}'
-                WHERE ID = {corporation.AddresseID};
-                ";
+                if (corporation.ID == null || corporation.ID == 0){
+                    //Setting the address
+                    command.CommandText = 
+                    @$"
+                    INSERT INTO Addresse (Country, City, ZipCode, BuildingNumber, Road, LocationName)
+                    Values ('{corporation.Country}', '{corporation.CityName}', '{corporation.Zipcode}', '{corporation.BuildingNumber}', '{corporation.RoadName}', '{corporation.LocationName}')
+                    ";
+                    command.ExecuteNonQuery();
+
+                    //Getting the ID from initialy created addresse
+                    var getAddressID = connection.CreateCommand();
+                    getAddressID.CommandText = $"SELECT ID FROM Addresse WHERE BuildingNumber = '{corporation.BuildingNumber}' AND ZipCode = '{corporation.Zipcode}' AND Road = '{corporation.RoadName}'";
+                    var addressIDReader = getAddressID.ExecuteReader();
+                    addressIDReader.Read();
+                    corporation.AddresseID = addressIDReader.GetInt32(0);
+                    addressIDReader.Close();
+
+                    //Setting the corporation with the address ID from the newly created address
+                    command.CommandText = 
+                    @$"
+                    INSERT INTO Corporation (CorporationName, Currency, AddresseID)
+                    VALUES ('{corporation.CorporationName}', '{corporation.CurrencyCode}', '{corporation.AddresseID}');
+                    ";
+                } else {
+                    command.CommandText =
+                    @$"UPDATE Corporation
+                    SET CorporationName = '{corporation.CorporationName}', Currency = '{corporation.CurrencyCode.ToString()}'
+                    WHERE ID = {corporation.ID};
+                    UPDATE Addresse
+                    SET Country = '{corporation.Country}', City = '{corporation.CityName}', ZipCode = '{corporation.Zipcode}', BuildingNumber = '{corporation.BuildingNumber}', Road = '{corporation.RoadName}', LocationName = '{corporation.LocationName}'
+                    WHERE ID = {corporation.AddresseID};
+                    ";
+                }
                 command.ExecuteNonQuery();
             }
         }
 
         public bool DeleteCorporation(Corporation corporation) {
             using (var connection = getConnection()) {
-                SqlCommand command = connection.CreateCommand();
+                var command = connection.CreateCommand();
                 command.CommandText = "DELETE FROM corporation WHERE ID=" + corporation.ID;
                 int deleted = command.ExecuteNonQuery();
                 return deleted > 0;

@@ -47,7 +47,6 @@ namespace ERPRO.CorporationNS
                 Database.Instance.InsertCorporation(newCorporation);
                 listPage.Add(newCorporation);
             }
-
             Clear(this);
             keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }
@@ -63,7 +62,6 @@ namespace ERPRO.CorporationNS
          void deleteCorporation(Corporation corporation) {
             Database.Instance.DeleteCorporation(corporation);
             listPage.Remove(corporation);
-
             Clear(this);
             keyheader.KeyHeader("corporation"); //added here to fix header when going back from edit view
         }

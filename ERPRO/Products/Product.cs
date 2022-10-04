@@ -47,8 +47,5 @@ namespace ERPRO.ProductNS
             return (PurchasePrice / 100) * GetProfit();
         }
         public string FullAddress { get => Location.FullAddress; }
-        public Product (int ID) {
-            Location = Database.Instance.GetAddress(ID);
-        }
     }
 }

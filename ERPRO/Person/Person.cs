@@ -16,6 +16,7 @@ namespace ERPRO.CustomerNS
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public Address Addresse { get; set; }
+        public int AddresseID { get; set; }
 
         private string GetFullName()
         {

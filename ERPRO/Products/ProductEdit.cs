@@ -40,6 +40,7 @@ namespace ERPRO.ProductNS
             edit.AddOption("Unit", "Quantity", ProductUnit.Quantity.ToString());
             edit.Edit(product);
             Quit();
+            Database.Instance.UpdateProduct(product);
             Clear(this);
         }
     }

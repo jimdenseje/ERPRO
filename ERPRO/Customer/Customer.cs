@@ -14,6 +14,8 @@ namespace ERPRO.CustomerNS
         public string ZipCode { get => Addresse.ZipCode; set => Addresse.ZipCode = value; }
         public string City { get => Addresse.City; set => Addresse.City = value; }
         public string Country { get => Addresse.Country; set => Addresse.Country = value; }
+        public string LocationName { get => Addresse.LocationName; set => Addresse.LocationName = value; }
+
         public string FullAddress { get => Addresse.FullAddress; }
     }
 }

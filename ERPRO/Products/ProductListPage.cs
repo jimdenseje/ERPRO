@@ -45,7 +45,7 @@ namespace ERPRO.ProductNS
         }
         void addProduct(Product _)
         {
-            Product newProduct = new Product(0);
+            Product newProduct = new Product();
             ProductEdit editor = new ProductEdit(newProduct);
             Display(editor);
             if (newProduct.Name != null)
@@ -62,17 +62,15 @@ namespace ERPRO.ProductNS
         {
             ProductEdit editor = new ProductEdit(product);
             Display(editor);
-            Database.Instance.UpdateProduct(product, product.ItemID);
-
+            Database.Instance.UpdateProduct(product);
             Clear(this); 
             keyheader.KeyHeader("product"); //added here to fix header when going back from edit view
         }
 
         void deleteProduct(Product product)
         {
-            Database.Instance.DeleteProduct(product, product.ItemID);
+            Database.Instance.DeleteProduct(product);
             listPage.Remove(product);
-
             Clear(this); 
             keyheader.KeyHeader("product"); //added here to fix header when going back from edit view
         }

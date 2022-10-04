@@ -8,49 +8,92 @@ namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {
-        public static List<Product> ProductList { get; } = new List<Product>();
+        List<Product> ProductList = new List<Product>();
+
+        public void InsertProduct(Product product) {
+            ProductList.Add(product);
+        }
+
 
         public Product GetProductFromID(int id) {
-            Product result = null;
-            foreach (var product in ProductList)
-            {
-                if (id == product.ItemID)
-                {
-                    result = product;
-                    break;
-                }
-            }
-            return result;
+            Product product = new Product();
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM Product WHERE ID=" + id;
+                var reader = command.ExecuteReader();
+                reader.Read();
+                product.ItemID = reader.GetInt32(0);
+                product.Name = reader.GetString(1);
+                product.Description = reader.GetString(2);
+                product.SellingPrice = reader.GetInt32(3);
+                product.PurchasePrice = reader.GetInt32(4);
+                product.LocationID = reader.GetInt32(5);
+                product.Quantity = reader.GetInt32(6);
+                product.Unit = reader.GetString(7);
+            };
+            return product;
         }
 
         public List<Product> GetAllProducts() {
             List<Product> products = new List<Product>();
-            foreach (var product in ProductList) {
-                products.Add(product);
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM Product";
+                var reader = command.ExecuteReader();
+
+                while(reader.Read()){
+                    Product product = new Product();
+                    product.ItemID = reader.GetInt32(0);
+                    product.Name = reader.GetString(1);
+                    product.Description = reader.GetString(2);
+                    product.SellingPrice = reader.GetDecimal(3);
+                    product.PurchasePrice = reader.GetDecimal(4);
+                    product.LocationID = reader.GetInt32(5);
+                    product.Quantity = reader.GetDecimal(6);
+                    product.Unit = reader.GetString(7);
+                    products.Add(product);
+                }
+                reader.Close();
             }
             return products;
         }
 
-        public Product InsertProduct(Product product) {
-            ProductList.Add(product);
-            return product;
-        }
 
-        public void UpdateProduct(Product product, int id) {
-            for (int i = 0; i < ProductList.Count; i++) {
-                if (ProductList[i].ItemID == id) {
-                    ProductList[i] = product;
-                    break;
+        public void UpdateProduct(Product product) {
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                if (product.ItemID == null || product.ItemID == 0){
+                    command.CommandText = 
+                    @$"
+                    INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+                    VALUES ('{product.Name}', '{product.Description}', '{product.SellingPrice}', '{product.PurchasePrice}', '{product.LocationID}', '{product.Quantity}', '{product.Unit}');
+                    ";
+                    command.ExecuteNonQuery();
+
+                    //Getting the ID from initialy created product
+                    var productid = connection.CreateCommand();
+                    productid.CommandText = $"SELECT ID FROM Product WHERE ItemDescription = '{product.Description}'";
+                    var productidreader = productid.ExecuteReader();
+                    productidreader.Read();
+                    product.ItemID = productidreader.GetInt32(0);
+                    productidreader.Close();
+                } else {
+                    command.CommandText =
+                    @$"UPDATE Product
+                    SET ItemName = '{product.Name}', ItemDescription = '{product.Description}', SellingPrice = '{product.SellingPrice}', PurchasePrice = '{product.PurchasePrice}', StorageID = '{product.LocationID}', QTY = '{product.Quantity}', UNIT = '{product.Unit}',
+                    WHERE ID = {product.ItemID};
+                    ";
+                    command.ExecuteNonQuery();
                 }
             }
         }
 
-        public void DeleteProduct(Product product, int id) {
-            for (int i = 0; i < ProductList.Count; i++) {
-                if (ProductList[i].ItemID == id) {
-                    ProductList.RemoveAt(i);
-                    break;
-                }
+        public bool DeleteProduct(Product product) {
+            using (var connection = getConnection()) {
+                var command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM Product WHERE ID=" + product.ItemID;
+                int deleted = command.ExecuteNonQuery();
+                return deleted > 0;
             }
         }
 

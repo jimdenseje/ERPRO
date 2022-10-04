@@ -9,48 +9,69 @@ namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {
-        public static List<Address> AddressList { get; } = new List<Address>();
+        public static List<Address> AddressList = new List<Address>();
+
+        public void InsertAddress(Address Address) {
+            AddressList.Add(Address);
+        }
 
         public Address GetAddress(int id) {
-            Address result = null;
-            foreach (var Address in AddressList)
+            Address addresse = new Address();
+            using (var connection = getConnection())
             {
-                if (id == Address.ID) {
-                    result = Address;
-                    break;
-                }
-            }
-            return result;
+                var command = connection.CreateCommand(); 
+                command.CommandText = "SELECT * FROM Addresse WHERE ID=" + id;
+                var reader = command.ExecuteReader();
+                reader.Read();
+                addresse.ID = reader.GetInt32(0);
+                addresse.Country = reader.GetString(1);
+                addresse.City = reader.GetString(2);
+                addresse.ZipCode = reader.GetString(3);
+                addresse.BuildingNumber = reader.GetString(4);
+                addresse.Road = reader.GetString(5);
+            };
+            return addresse;
         }
 
         public List<Address> GetAddress() {
-            List<Address> Addresses = new List<Address>();
-            foreach (var addr in Addresses) {
-                Addresses.Add(addr);
-            }
-            return Addresses;
-        }
-
-        public Address InsertAddress(Address Address) {
-            AddressList.Add(Address);
-            return Address;
-        }
-
-        public void UpdateAddress(Address Address, int id) {
-            for (int i = 0; i < AddressList.Count; i++) {
-                if (AddressList[i].ID == id) {
-                    AddressList[i] = Address;
-                    break;
+            List<Address> addresses = new List<Address>();
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM Address";
+                var reader = command.ExecuteReader();
+                while(reader.Read()){
+                    Address addresse = new Address();
+                    addresse.ID = reader.GetInt32(0);
+                    addresse.Country = reader.GetString(1);
+                    addresse.City = reader.GetString(2);
+                    addresse.ZipCode = reader.GetString(3);
+                    addresse.BuildingNumber = reader.GetString(4);
+                    addresse.Road = reader.GetString(5);
+                    addresses.Add(addresse);
                 }
+                reader.Close();
+            }
+            return addresses;
+        }
+
+        public void UpdateAddress(Address Address) {
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                command.CommandText =
+                @$"UPDATE Addresse
+                SET Country = '{Address.Country}', City = '{Address.City}', ZipCode = '{Address.ZipCode}', BuildingNumber = '{Address.BuildingNumber}', Road = '{Address.Road}', LocationName = '{Address.LocationName}'
+                WHERE ID = {Address.ID};
+                ";
+                command.ExecuteNonQuery();
             }
         }
 
-        public void DeleteAddress (Address Address, int id) {
-            for (int i = 0; i < AddressList.Count; i++) {
-                if (AddressList[i].ID == id) {
-                    AddressList.RemoveAt(i);
-                    break;
-                }
+        public bool DeleteAddress (Address Address) {
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM Address WHERE ID=" + Address.ID;
+                int deleted = command.ExecuteNonQuery();
+                return deleted > 0;
             }
         }
     }

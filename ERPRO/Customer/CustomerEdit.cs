@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
+using ERPRO.DatabaseNS;
 
 namespace ERPRO.CustomerNS
 {
@@ -26,6 +27,7 @@ namespace ERPRO.CustomerNS
             edit.TextBox("Phone number", nameof(customer.PhoneNumber));
             edit.TextBox("Email", nameof(customer.Email));
             edit.Edit(customer);
+            Database.Instance.UpdateCustomer(customer);
             Quit();
             Clear(this);
         }
