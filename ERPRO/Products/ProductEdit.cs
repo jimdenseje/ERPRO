@@ -28,14 +28,10 @@ namespace ERPRO.ProductNS
 
             //TODO Has to be dynamic and not hardcoded
             edit.SelectBox("Storage", nameof(product.LocationID));
-            foreach (var address in Database.Instance.GetAddress())
-            {
-                if (address.LocationName != "" && address.LocationName.Contains("Lager"))
-                {
-                    edit.AddOption("Storage", address.LocationName, address.ID);
-                }
-            }
-                        
+            edit.AddOption("Storage", "Aarhus Lager", 1);
+            edit.AddOption("Storage", "Odense Lager", 2);
+            edit.AddOption("Storage", "Tønder Lager", 3);
+            
             edit.TextBox("Quantity", nameof(product.Quantity));
             edit.SelectBox("Unit", nameof(product.Unit));
             edit.AddOption("Unit", "Centimeter", ProductUnit.Centimeter.ToString());
@@ -44,6 +40,7 @@ namespace ERPRO.ProductNS
             edit.AddOption("Unit", "Quantity", ProductUnit.Quantity.ToString());
             edit.Edit(product);
             Quit();
+            Database.Instance.UpdateProduct(product);
             Clear(this);
         }
     }
