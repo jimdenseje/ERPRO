@@ -75,23 +75,23 @@ SELECT * FROM Person WHERE ID = 1
             --The following adds products to the DB
             --Storage ID 1 is nothing - 2 is Aarhus - 3 is Odense - 4 is Tønder
 
--- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('Bold', 'En rund hvid bold', '59.99', '39.99', '2', '100', 'Indefinite');
+INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Bold', 'En rund hvid bold', '59.99', '39.99', '2', '100', 'Indefinite');
 
--- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('Basketbold', 'En rund orange og sort bold', '69.99', '42.99', '2', '100', 'Indefinite');
+INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Basketbold', 'En rund orange og sort bold', '69.99', '42.99', '2', '100', 'Indefinite');
 
--- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('Bacon', 'Sprødt svin', '19.99', '2', '3', '40', 'Indefinite');
+INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Bacon', 'Sprødt svin', '19.99', '2', '3', '40', 'Indefinite');
 
--- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('Kage', 'Kanelkage med kaffecreme', '24.99', '8', '3', '35', 'Indefinite');
+INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Kage', 'Kanelkage med kaffecreme', '24.99', '8', '3', '35', 'Indefinite');
 
--- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('Æble', 'Røde Pink Lady', '59.99', '38', '3', '78', 'Indefinite');
+INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Æble', 'Røde Pink Lady', '59.99', '38', '3', '78', 'Indefinite');
 
--- INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('Maleri', 'Ægte fake picasso', '599.99', '5', '1', '25', 'Indefinite');
+INSERT INTO Product (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Maleri', 'Ægte fake picasso', '599.99', '5', '1', '25', 'Indefinite');
 
 -- SELECT * FROM Product
 
@@ -113,32 +113,50 @@ SELECT * FROM Person WHERE ID = 1
 
             --The following adds saleorder, saleorderlineproduct and saleorderline
 --Creating the order with timestamps
--- INSERT INTO SaleOrder (PersonID, Status, TimeOfCreation, TimeOfAcceptance)
--- VALUES ('1', '2', GETDATE(), GETDATE());
+INSERT INTO SaleOrder (PersonID, Status, TimeOfCreation, TimeOfAcceptance)
+VALUES ('1', '2', GETDATE(), GETDATE());
 
--- INSERT INTO SaleOrder (PersonID, Status, TimeOfCreation, TimeOfAcceptance)
--- VALUES ('2', '3', GETDATE(), GETDATE());
+INSERT INTO SaleOrder (PersonID, Status, TimeOfCreation, TimeOfAcceptance)
+VALUES ('2', '3', GETDATE(), GETDATE());
 
-
+SELECT * FROM SaleOrder WHERE OrderNumber = '5'
 
             --The following creates 3 lineproducts and 3 orderlines, adding them to the saleorders
--- INSERT INTO SalesOrderLineProduct (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('1', 'Bacon', 'Sprødt svin', '19.99', '2', '3', '4', 'Indefinite')
+INSERT INTO SalesOrderLineProduct (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Bacon', 'Sprødt svin', '19.99', '2', '3', '4', 'Indefinite')
 
--- INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
--- VALUES ('5', '1');
+SELECT CAST(SCOPE_IDENTITY() AS INT)
 
--- INSERT INTO SalesOrderLineProduct (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('2', 'Æble', 'Røde Pink Lady', '59.99', '38', '3', '4', 'Indefinite');
+SELECT * FROM Product
 
--- INSERT INTO SalesOrderLineProduct (ID, ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
--- VALUES ('3', 'Maleri', 'Ægte fake picasso', '599.99', '5', '1', '2', 'Indefinite');
 
--- INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
--- VALUES ('6', '2');
+SELECT SalesOrderLineProductID FROM SaleOrderLine WHERE SaleOrder = 22
+SELECT * FROM SalesOrderLineProduct WHERE ID = 13
 
--- INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
--- VALUES ('6', '3');
+
+SELECT * FROM Product
+SELECT * FROM SaleOrder
+SELECT * FROM SaleOrderLine
+SELECT * FROM SalesOrderLineProduct
+
+
+INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
+VALUES ('5', '1');
+
+INSERT INTO SalesOrderLineProduct (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Æble', 'Røde Pink Lady', '59.99', '38', '3', '4', 'Indefinite');
+
+INSERT INTO SalesOrderLineProduct (ItemName, ItemDescription, SellingPrice, PurchasePrice, StorageID, QTY, UNIT)
+VALUES ('Maleri', 'Ægte fake picasso', '599.99', '5', '1', '2', 'Indefinite');
+
+INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
+VALUES ('6', '2');
+
+SELECT SCOPE_IDENTITY()
+
+
+INSERT INTO SaleOrderLine (SaleOrder, SalesOrderLineProductID)
+VALUES ('6', '3');
 
 -- SELECT * FROM SaleOrderLine
 -- SELECT * FROM SalesOrderLineProduct

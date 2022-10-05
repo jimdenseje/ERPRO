@@ -53,6 +53,11 @@ namespace ERPRO.SalesNS
 
             OrderLines.Add(newSalesOrderLine);
         }
+
+        public void AddSalesOrderLine(SalesOrderLine line) {
+            OrderLines.Add(line);
+        }
+
         public void DeleteSalesOrderLine(SalesOrderLine salesorderline)
         {
             OrderLines.Remove(salesorderline);
@@ -67,6 +72,11 @@ namespace ERPRO.SalesNS
             this.Product = new Product();
             PropMapper<Product, Product>.CopyTo(product, this.Product);
         }
+
+        public SalesOrderLine()  {
+            
+        }
+
         public Product Product { get; set; }
 
         public string Name { get => Product.Name; set => Product.Name = value; }

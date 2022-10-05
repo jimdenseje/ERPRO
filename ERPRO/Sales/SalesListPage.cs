@@ -63,6 +63,7 @@ namespace ERPRO.SalesNS
         }
         public void addSalesOrder(SalesOrder _)
         {
+            SalesOrder neworder = new SalesOrder();
             Person person = new Person();
             Clear(this);
 
@@ -77,39 +78,41 @@ namespace ERPRO.SalesNS
             }
 
             // person = Database.Instance.GetPerson(chooseCustomer.lastpicker);
-            _.person = Database.Instance.GetPerson(chooseCustomer.lastpicker);
-            _.person.Addresse = Database.Instance.GetAddress(_.person.AddresseID);
+            neworder.person = Database.Instance.GetPerson(chooseCustomer.lastpicker);
+            neworder.person.Addresse = Database.Instance.GetAddress(neworder.person.AddresseID);
 
             SalesProductPicker chooseProduct = new SalesProductPicker();
             Display(chooseProduct);
 
-            _.CustomerID = chooseCustomer.lastpicker;
-            _.OrderLines = chooseProduct.ProductPicker;
+            neworder.CustomerID = chooseCustomer.lastpicker;
+            neworder.OrderLines = chooseProduct.ProductPicker;
 
-            if (_.OrderLines.Count == 0)
+            if (neworder.OrderLines.Count == 0)
             {
                 Clear(this);
                 keyheader.KeyHeader("salesorder");
                 return;
             }
 
-            SalesEdit editor = new SalesEdit(_);
+            SalesEdit editor = new SalesEdit(neworder);
             Display(editor);
 
-            if (_.person.FirstName != "" && _.status != null)
+            if (neworder.person.FirstName != "" && neworder.status != null)
             {
-                Database.Instance.InsertSaleOrder(_);
-                listPage.Add(_);
+                Database.Instance.InsertSaleOrder(neworder);
+                Database.Instance.UpdateSaleOrder(neworder, 0);
+                listPage.Add(neworder);
             }
             else
             {
-                foreach (SalesOrderLine item in _.OrderLines)
+                foreach (SalesOrderLine item in neworder.OrderLines)
                 {
                     Product ChosenProduct = Database.Instance.GetProductFromID(item.Product.ItemID);
                     ChosenProduct.Quantity += item.SaleQty;
                     Database.Instance.UpdateProduct(ChosenProduct);
                 }
             }
+            Database.Instance.UpdateSaleOrder(neworder, 0);
 
             Clear(this);
             keyheader.KeyHeader("salesorder");
