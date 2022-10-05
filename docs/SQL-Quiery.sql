@@ -8,6 +8,8 @@
 --     LocationName VARCHAR(60) NOT NULL
 -- );
 
+SELECT * FROM Addresse
+
 -- SELECT * FROM Addresse WHERE ID=2
 
 -- CREATE TABLE Person (

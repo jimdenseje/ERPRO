@@ -82,6 +82,7 @@ namespace ERPRO.DatabaseNS
                     customer.ZipCode = addressReader.GetString(3);
                     customer.BuildingNumber = addressReader.GetString(4);
                     customer.Road = addressReader.GetString(5);
+                    customer.LocationName = addressReader.GetString(6);
                     addressReader.Close();
                 }
             }
