@@ -51,10 +51,15 @@ namespace ERPRO.ProductNS
         {
             Product newProduct = new Product();
             ProductEdit editor = new ProductEdit(newProduct);
-            Display(editor);
-            if (newProduct.Name != null)
+            try
             {
-                Database.Instance.InsertProduct(newProduct);
+                Display(editor);
+            }
+            catch { }
+
+            if (newProduct.Name != null && newProduct.Unit != null)
+            {
+                Database.Instance.UpdateProduct(newProduct);
                 listPage.Add(newProduct);
             }
 

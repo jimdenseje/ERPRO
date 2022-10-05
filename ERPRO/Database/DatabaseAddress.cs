@@ -29,6 +29,7 @@ namespace ERPRO.DatabaseNS
                 addresse.ZipCode = reader.GetString(3);
                 addresse.BuildingNumber = reader.GetString(4);
                 addresse.Road = reader.GetString(5);
+                addresse.LocationName = reader.GetString(6);
             };
             return addresse;
         }
@@ -37,7 +38,7 @@ namespace ERPRO.DatabaseNS
             List<Address> addresses = new List<Address>();
             using (var connection = getConnection()){
                 var command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM Address";
+                command.CommandText = "SELECT * FROM Addresse";
                 var reader = command.ExecuteReader();
                 while(reader.Read()){
                     Address addresse = new Address();
@@ -47,6 +48,7 @@ namespace ERPRO.DatabaseNS
                     addresse.ZipCode = reader.GetString(3);
                     addresse.BuildingNumber = reader.GetString(4);
                     addresse.Road = reader.GetString(5);
+                    addresse.LocationName = reader.GetString(6);
                     addresses.Add(addresse);
                 }
                 reader.Close();

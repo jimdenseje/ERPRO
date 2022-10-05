@@ -8,13 +8,6 @@ namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {
-        List<Product> ProductList = new List<Product>();
-
-        public void InsertProduct(Product product) {
-            ProductList.Add(product);
-        }
-
-
         public Product GetProductFromID(int id) {
             Product product = new Product();
             using (var connection = getConnection()){
