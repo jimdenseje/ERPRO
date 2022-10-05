@@ -67,30 +67,48 @@ SELECT * FROM Addresse
 --     UNIT VARCHAR(max) NOT NULL,
 -- );
 
--- CREATE TABLE SaleOrder (
---     OrderNumber INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
---     TimeOfCreation DATETIME NOT NULL,
---     TimeOfAcceptance DATETIME NOT NULL,
---     PersonID INT FOREIGN KEY REFERENCES Person(ID),
---     Status TINYINT FOREIGN KEY REFERENCES SaleOrderStatus(ID)
--- );
+CREATE TABLE SaleOrder (
+    OrderNumber INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+    TimeOfCreation DATETIME NOT NULL,
+    TimeOfAcceptance DATETIME NOT NULL,
+    PersonID INT FOREIGN KEY REFERENCES Person(ID),
+    Status TINYINT FOREIGN KEY REFERENCES SaleOrderStatus(ID)
+);
 
--- CREATE TABLE SalesOrderLineProduct (
---     ID INT NOT NULL PRIMARY KEY,
---     ItemName VARCHAR(max) NOT NULL,
---     ItemDescription VARCHAR(max) NOT NULL,
---     SellingPrice DECIMAL NOT NULL,
---     PurchasePrice DECIMAL NOT NULL,
---     StorageID INT FOREIGN KEY REFERENCES Addresse(ID) NOT NULL,
---     QTY DECIMAL NOT NULL,
---     UNIT VARCHAR(max) NOT NULL,
---     -- CONSTRAINT UQ_Product UNIQUE NONCLUSTERED(
---     --     ItemName, StorageID
---     -- )
--- );
+SELECT * FROM Person
+
+DROP TABLE SalesOrderLineProduct
+
+SELECT * FROM SalesOrderLineProduct
+
+CREATE TABLE SalesOrderLineProduct (
+    ID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+    ItemName VARCHAR(max) NOT NULL,
+    ItemDescription VARCHAR(max) NOT NULL,
+    SellingPrice DECIMAL NOT NULL,
+    PurchasePrice DECIMAL NOT NULL,
+    StorageID INT FOREIGN KEY REFERENCES Addresse(ID) NOT NULL,
+    UNIT VARCHAR(max) NOT NULL,
+);
+
+DROP TABLE SaleOrderLine
+
+SELECT * FROM Product
+SELECT * FROM SaleOrder
+SELECT * FROM SaleOrderLine
+SELECT * FROM SalesOrderLineProduct
+
+CREATE TABLE SaleOrderLine (
+    ID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+    SaleOrder INT FOREIGN KEY REFERENCES SaleOrder(OrderNumber),
+    SalesOrderLineProductID INT FOREIGN KEY REFERENCES SalesOrderLineProduct(ID),
+    QTY DECIMAL NOT NULL
+);
+
+DROP TABLE SaleOrderLine
 
 
--- CREATE TABLE SaleOrderLine (
---     SaleOrder INT FOREIGN KEY REFERENCES SaleOrder(OrderNumber),
---     SalesOrderLineProductID INT FOREIGN KEY REFERENCES SalesOrderLineProduct(ID)
--- );
+DELETE FROM Product
+DELETE FROM SaleOrder
+DELETE FROM SalesOrderLineProduct
+DELETE FROM SaleOrderLine

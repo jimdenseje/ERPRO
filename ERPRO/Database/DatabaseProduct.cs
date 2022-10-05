@@ -22,7 +22,32 @@ namespace ERPRO.DatabaseNS
                 command.CommandText = "SELECT * FROM Product WHERE ID=" + id;
                 var reader = command.ExecuteReader();
                 reader.Read();
-                product.ItemID = reader.GetInt32(0);
+                try{product.ItemID = reader.GetInt32(0);}
+                catch(InvalidOperationException e){
+                    return new Product();
+                }
+                product.Name = reader.GetString(1);
+                product.Description = reader.GetString(2);
+                product.SellingPrice = reader.GetDecimal(3);
+                product.PurchasePrice = reader.GetDecimal(4);
+                product.LocationID = reader.GetInt32(5);
+                product.Quantity = reader.GetDecimal(6);
+                product.Unit = reader.GetString(7);
+            };
+            return product;
+        }
+
+        public Product GetSalesProductFromID(int id) {
+            Product product = new Product();
+            using (var connection = getConnection()){
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM SalesOrderLineProduct WHERE ID=" + id;
+                var reader = command.ExecuteReader();
+                reader.Read();
+                try{product.ItemID = reader.GetInt32(0);}
+                catch(InvalidOperationException e){
+                    return new Product();
+                }
                 product.Name = reader.GetString(1);
                 product.Description = reader.GetString(2);
                 product.SellingPrice = reader.GetDecimal(3);

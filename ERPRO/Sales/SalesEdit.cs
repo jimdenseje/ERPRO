@@ -27,10 +27,6 @@ namespace ERPRO.SalesNS
         {
             Clear(this);
             Form<SalesOrder> edit = new Form<SalesOrder>();
-            /*edit.TextBox("Order ID", "OrderID");
-            edit.TextBox("Time Of Creation", "TimeOfCreation");
-            edit.TextBox("Time Of Acceptance", "TimeOfAcceptance");*/
-            //edit.TextBox("Customer ID", "CustomerID");
 
             edit.TextBox("Road", nameof(salesOrder.person.Addresse.Road));
             edit.TextBox("BuildingNumber", nameof(salesOrder.person.Addresse.BuildingNumber));
@@ -38,13 +34,6 @@ namespace ERPRO.SalesNS
             edit.TextBox("City", nameof(salesOrder.person.Addresse.City));
             edit.TextBox("Email", nameof(salesOrder.person.Email));
             edit.TextBox("PhoneNumber", nameof(salesOrder.person.PhoneNumber));
-
-            // edit.TextBox("Road", "status");
-            // edit.TextBox("BuildingNumber", "status");
-            // edit.TextBox("Zip Code", "status");
-            // edit.TextBox("City", "status");
-            // edit.TextBox("Email", "status");
-            // edit.TextBox("PhoneNumber", "status");
 
             edit.SelectBox("Status", "status");
             edit.AddOption("Status", "None", nameof(SalesOrder.Status.None));

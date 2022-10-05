@@ -22,6 +22,9 @@ namespace ERPRO.ProductNS
                 keyheader.KeyHeader("product");
                 listPage = new ListPage<Product>();
                 var products = Database.Instance.GetAllProducts();
+                if(products.Count == 0){
+                    products.Add(new Product());
+                }
                 listPage.Add(products);
                 listPage.AddKey(ConsoleKey.F1, addProduct);
                 listPage.AddKey(ConsoleKey.F2, editProduct);
