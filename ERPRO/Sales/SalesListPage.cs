@@ -77,7 +77,6 @@ namespace ERPRO.SalesNS
                 return;
             }
 
-            // person = Database.Instance.GetPerson(chooseCustomer.lastpicker);
             neworder.person = Database.Instance.GetPerson(chooseCustomer.lastpicker);
             neworder.person.Addresse = Database.Instance.GetAddress(neworder.person.AddresseID);
 

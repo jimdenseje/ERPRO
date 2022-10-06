@@ -1,15 +1,18 @@
 -- CREATE TABLE Addresse (
 --     ID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
 --     Country VARCHAR(60) NOT NULL,
---     City VARCHAR(60) NOT NULL,
+--     City VARCHAR(85) NOT NULL,
 --     ZipCode VARCHAR(60) NOT NULL,
 --     BuildingNumber VARCHAR(60) NOT NULL,
 --     Road VARCHAR(60) NOT NULL,
 --     LocationName VARCHAR(60) NOT NULL
 -- );
 
-SELECT * FROM Addresse
+ALTER TABLE Addresse
+ALTER COLUMN City VARCHAR(85) NOT NULL
 
+SELECT * FROM Addresse
+a
 -- SELECT * FROM Addresse WHERE ID=2
 
 -- CREATE TABLE Person (
@@ -39,7 +42,11 @@ SELECT * FROM Addresse
 
 -- SELECT * FROM Person
 
--- SELECT * FROM Customer
+UPDATE Customer
+SET LastPurchase = GETDATE()
+WHERE ID = '22'
+
+SELECT * FROM Customer
 
 -- CREATE TABLE Corporation (
 --     ID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
@@ -66,6 +73,8 @@ SELECT * FROM Addresse
 --     QTY DECIMAL NOT NULL,
 --     UNIT VARCHAR(max) NOT NULL,
 -- );
+
+SELECT * FROM Customer
 
 CREATE TABLE SaleOrder (
     OrderNumber INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
