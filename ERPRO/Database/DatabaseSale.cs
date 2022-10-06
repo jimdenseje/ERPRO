@@ -149,6 +149,14 @@ namespace ERPRO.DatabaseNS
                 saleorder.OrderID = saleorderidreader.GetInt32(0);
                 saleorderidreader.Close();
 
+                command.CommandText = 
+                @$"UPDATE Customer
+                SET LastPurchase = GETDATE()
+                WHERE ID = '{saleorder.CustomerID}'
+                ";
+                command.ExecuteNonQuery();
+
+
                 //SalesOrderLineProduct
                 int salesOrderLineProductID = 0;
                 foreach (var orderline in saleorder.OrderLines)

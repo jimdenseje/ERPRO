@@ -27,6 +27,12 @@
 
 -- FOR TESTING PURPOSES::
 -- SELECT * FROM Addresse
+UPDATE Customer
+SET LastPurchase = GETDATE()
+WHERE ID = 22
+
+UPD INTO Customer (LastPurchase)
+VALUES ('GETDATE()') WHERE ID = {saleorder.CustomerID}
 
 SELECT * FROM Customer
 
