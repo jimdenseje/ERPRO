@@ -2,18 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ERPRO.ProductNS;
 using ERPRO.SalesNS;
 
 namespace ERPRO.DatabaseNS
 {
     internal partial class Database
     {
-        // public static List<SalesOrder> SalesOrderList { get; } = new List<SalesOrder>();
-
-        List<SalesOrder> SalesOrderList = new List<SalesOrder>();
-
         public void InsertSaleOrder(SalesOrder saleorder) {
-            SalesOrderList.Add(saleorder);
+            UpdateSaleOrder(saleorder, 0);
         }
 
         public SalesOrder GetSalesorder(int id) {
@@ -29,8 +26,26 @@ namespace ERPRO.DatabaseNS
                 order.CustomerID = reader.GetInt32(3);
                 order.status = reader.GetString(4);
 
-
-
+                if (order.status != null)
+                {
+                    switch (order.status)
+                    {
+                        case "1":
+                            order.status = "None";
+                            break;
+                        case "2":
+                            order.status = "Created";
+                            break;
+                        case "3":
+                            order.status = "Confirmed";
+                            break;
+                        case "4":
+                            order.status = "Packed";
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
             }
             return order;
@@ -50,6 +65,28 @@ namespace ERPRO.DatabaseNS
                     order.TimeOfAcceptance = reader.GetDateTime(2);
                     order.CustomerID = reader.GetInt32(3);
                     order.status = reader.GetByte(4).ToString();
+
+                    if (order.status != null)
+                    {
+                        switch (order.status)
+                        {
+                            case "1":
+                                order.status = "None";
+                                break;
+                            case "2":
+                                order.status = "Created";
+                                break;
+                            case "3":
+                                order.status = "Confirmed";
+                                break;
+                            case "4":
+                                order.status = "Packed";
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
                     salesorders.Add(order);
                 }
                 reader.Close();
@@ -75,7 +112,7 @@ namespace ERPRO.DatabaseNS
         }
 
         public void UpdateSaleOrder(SalesOrder saleorder, int id) {
-            int orderStatus = 0;
+            int orderStatus = 1;
 
             if(saleorder.status != null){
                 switch (saleorder.status)
@@ -153,11 +190,19 @@ namespace ERPRO.DatabaseNS
         }
 
         public void DeleteSaleOrder(SalesOrder saleorder, int id) {
-            for (int i = 0; i < SalesOrderList.Count; i++) {
-                if (SalesOrderList[i].OrderID == id) {
-                    SalesOrderList.RemoveAt(i);
-                    break;
-                }
+
+            using (var connection = getConnection())
+            {
+                var command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM SaleOrderLine WHERE SaleOrder=" + id;
+                int deleted = command.ExecuteNonQuery();
+            }
+
+            using (var connection = getConnection())
+            {
+                var command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM SaleOrder WHERE OrderNumber=" + id;
+                int deleted = command.ExecuteNonQuery();
             }
         }
     }

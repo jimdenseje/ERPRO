@@ -15,6 +15,33 @@ namespace ERPRO.DatabaseNS
         }
 
 
+        public int GetProductWhereNameAndDescription(int id)
+        {
+            using (var connection = getConnection())
+            {
+                var command = connection.CreateCommand();
+                command.CommandText = @$"SELECT * FROM SalesOrderLineProduct WHERE ID='{id}'";
+                var reader = command.ExecuteReader();
+                reader.Read();
+                try { reader.GetInt32(0); }
+                catch (InvalidOperationException)
+                {
+                    return 0;
+                }
+
+                command = connection.CreateCommand();
+                command.CommandText = @$"SELECT ID FROM Product WHERE ItemName='{reader.GetString(1)}' and ItemDescription='{reader.GetString(2)}'";
+                reader.Close();
+                reader = command.ExecuteReader();
+                reader.Read();
+                try { return reader.GetInt32(0); }
+                catch (InvalidOperationException)
+                {
+                    return 0;
+                }
+            };
+        }
+
         public Product GetProductFromID(int id) {
             Product product = new Product();
             using (var connection = getConnection()){
@@ -23,7 +50,7 @@ namespace ERPRO.DatabaseNS
                 var reader = command.ExecuteReader();
                 reader.Read();
                 try{product.ItemID = reader.GetInt32(0);}
-                catch(InvalidOperationException e){
+                catch(InvalidOperationException){
                     return new Product();
                 }
                 product.Name = reader.GetString(1);
