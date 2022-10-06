@@ -112,7 +112,7 @@ namespace ERPRO.DatabaseNS
         }
 
         public void UpdateSaleOrder(SalesOrder saleorder, int id) {
-            int orderStatus = 0;
+            int orderStatus = 1;
 
             if(saleorder.status != null){
                 switch (saleorder.status)
