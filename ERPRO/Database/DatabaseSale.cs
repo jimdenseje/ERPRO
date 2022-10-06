@@ -181,6 +181,17 @@ namespace ERPRO.DatabaseNS
         }
         }
 
+        public void DeleteSaleOrderLine(int id)
+        {
+
+            using (var connection = getConnection())
+            {
+                var command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM SaleOrderLine WHERE SalesOrderLineProductID=" + id;
+                int deleted = command.ExecuteNonQuery();
+            }
+
+        }
         public void DeleteSaleOrder(SalesOrder saleorder, int id) {
 
             using (var connection = getConnection())

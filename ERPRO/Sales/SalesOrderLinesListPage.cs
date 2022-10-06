@@ -124,7 +124,8 @@ namespace ERPRO.SalesNS
 
             decimal oldqty = salesOrderLine.SaleQty;
 
-            Product ChosenProduct = Database.Instance.GetProductFromID(salesOrderLine.Product.ItemID);
+            int IdOfProdukt = Database.Instance.GetProductWhereNameAndDescription(salesOrderLine.Product.ItemID);
+            Product ChosenProduct = Database.Instance.GetProductFromID(IdOfProdukt);
             ChosenProduct.Quantity += oldqty;
             Database.Instance.UpdateProduct(ChosenProduct);
 
@@ -132,7 +133,8 @@ namespace ERPRO.SalesNS
             
             salesOrderLine.SaleQty = qty;
 
-            ChosenProduct = Database.Instance.GetProductFromID(salesOrderLine.Product.ItemID);
+            IdOfProdukt = Database.Instance.GetProductWhereNameAndDescription(salesOrderLine.Product.ItemID);
+            ChosenProduct = Database.Instance.GetProductFromID(IdOfProdukt);
             ChosenProduct.Quantity -= qty;
             Database.Instance.UpdateProduct(ChosenProduct);
 
@@ -154,12 +156,13 @@ namespace ERPRO.SalesNS
         void deleteSaleLineOrder(SalesOrderLine salesOrderLine)
         {
             //Database.Instance.DeleteSaleOrder(salesOrder, salesOrder.OrderID);
-
-            Product ChosenProduct = Database.Instance.GetProductFromID(salesOrderLine.Product.ItemID);
+            int IdOfProdukt = Database.Instance.GetProductWhereNameAndDescription(salesOrderLine.Product.ItemID);
+            Product ChosenProduct = Database.Instance.GetProductFromID(IdOfProdukt);
             ChosenProduct.Quantity += salesOrderLine.SaleQty;
             Database.Instance.UpdateProduct(ChosenProduct);
 
             salesOrder.DeleteSalesOrderLine(salesOrderLine);
+            Database.Instance.DeleteSaleOrderLine(salesOrderLine.Product.ItemID);
             listPage.Remove(salesOrderLine);
 
             Clear(this);
