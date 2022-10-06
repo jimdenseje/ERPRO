@@ -32,13 +32,13 @@ namespace ERPRO.SalesNS
                 if (salesOrder.status == "Created")
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Press F1 to add SaleOrderLine");
-                    Console.WriteLine($"Press F2 to edit SaleOrderLine");
+                    //Console.WriteLine("Press F1 to add SaleOrderLine");
+                    //Console.WriteLine($"Press F2 to edit SaleOrderLine");
                     Console.WriteLine("Press F5 to delete SaleOrderLine");
                     Console.WriteLine();
 
-                    listPage.AddKey(ConsoleKey.F1, addSaleLineOrder);
-                    listPage.AddKey(ConsoleKey.F2, editSaleLineOrder);
+                    //listPage.AddKey(ConsoleKey.F1, addSaleLineOrder);
+                    //listPage.AddKey(ConsoleKey.F2, editSaleLineOrder);
                     listPage.AddKey(ConsoleKey.F5, deleteSaleLineOrder);
                 }
 
