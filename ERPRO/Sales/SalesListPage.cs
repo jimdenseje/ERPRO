@@ -100,7 +100,6 @@ namespace ERPRO.SalesNS
             if (neworder.person.FirstName != "" && neworder.status != null)
             {
                 Database.Instance.InsertSaleOrder(neworder);
-                Database.Instance.UpdateSaleOrder(neworder, 0);
                 listPage.Add(neworder);
             }
             else
@@ -133,7 +132,8 @@ namespace ERPRO.SalesNS
             {
                 foreach (SalesOrderLine item in salesOrder.OrderLines)
                 {
-                    Product ChosenProduct = Database.Instance.GetProductFromID(item.Product.ItemID);
+                    int IdOfProdukt = Database.Instance.GetProductWhereNameAndDescription(item.Product.ItemID);
+                    Product ChosenProduct = Database.Instance.GetProductFromID(IdOfProdukt);
                     ChosenProduct.Quantity += item.SaleQty;
                     Database.Instance.UpdateProduct(ChosenProduct);
                 }
